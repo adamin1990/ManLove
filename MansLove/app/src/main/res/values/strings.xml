@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">MansLove</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="networkerror">网络错误</string>
+</resources>

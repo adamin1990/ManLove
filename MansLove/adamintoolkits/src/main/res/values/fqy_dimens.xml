@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 间距大小 -->
+    <dimen name="dimen1">1dp</dimen>
+    <dimen name="dimen2">2dp</dimen>
+    <dimen name="dimen3">3dp</dimen>
+    <dimen name="dimen4">4dp</dimen>
+    <dimen name="dimen5">5dp</dimen>
+    <dimen name="dimen10">10dp</dimen>
+    <dimen name="dimen15">15dp</dimen>
+    <dimen name="dimen20">20dp</dimen>
+    <dimen name="dimen25">25dp</dimen>
+    <dimen name="dimen30">30dp</dimen>
+    <dimen name="dimen35">35dp</dimen>
+    <dimen name="dimen40">40dp</dimen>
+    <dimen name="dimen45">45dp</dimen>
+    <dimen name="dimen50">50dp</dimen>
+    <dimen name="dimen55">55dp</dimen>
+    <dimen name="dimen60">60dp</dimen>
+    <dimen name="dimen65">65dp</dimen>
+    <dimen name="dimen70">70dp</dimen>
+    <dimen name="dimen75">75dp</dimen>
+    <dimen name="dimen80">80dp</dimen>
+    <dimen name="dimen85">85dp</dimen>
+    <dimen name="dimen90">90dp</dimen>
+    <dimen name="dimen95">95dp</dimen>
+    <dimen name="dimen100">100dp</dimen>
+    <dimen name="dimen110">110dp</dimen>
+    <dimen name="dimen120">120dp</dimen>
+    <dimen name="dimen130">130dp</dimen>
+    <dimen name="dimen140">140dp</dimen>
+    <dimen name="dimen150">150dp</dimen>
+    <dimen name="dimen160">160dp</dimen>
+    <dimen name="dimen170">170dp</dimen>
+    <dimen name="dimen180">180dp</dimen>
+    <dimen name="dimen190">190dp</dimen>
+    <dimen name="dimen200">200dp</dimen>
+    <dimen name="dimen210">210dp</dimen>
+    <dimen name="dimen220">220dp</dimen>
+
+    <!-- 字体大小 -->
+    <dimen name="textSize10">10sp</dimen>
+    <dimen name="textSize12">12sp</dimen>
+    <dimen name="textSize14">14sp</dimen>
+    <dimen name="textSize16">16sp</dimen>
+    <dimen name="textSize18">18sp</dimen>
+    <dimen name="textSize20">20sp</dimen>
+    <dimen name="textSize22">22sp</dimen>
+    <dimen name="textSize26">26sp</dimen>
+    <dimen name="textSize28">28sp</dimen>
+    <dimen name="textSize30">30sp</dimen>
+    <dimen name="textSize32">32sp</dimen>
+    <dimen name="textSize36">36sp</dimen>
+    <dimen name="textSize48">48sp</dimen>
+    <dimen name="textSize56">56sp</dimen>
+    <dimen name="textSize72">72sp</dimen>
+
+</resources>
