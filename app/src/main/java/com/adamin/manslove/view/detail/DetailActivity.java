@@ -63,9 +63,9 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
     EdgeEffectCompat leftEdge,rightEdge;
     private boolean hide=false;
     private String sh="after";
-   @Bind(R.id.layout_adview)
-    LinearLayout layout_ads;
-    private IFLYBannerAd bannerView;
+//   @Bind(R.id.layout_adview)
+//    LinearLayout layout_ads;
+//    private IFLYBannerAd bannerView;
 
 
     @Override
@@ -82,7 +82,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         init();
         getData(id);
         initlistener();
-        createBannerAd();
+//        createBannerAd();
 
 
     }
@@ -243,7 +243,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         @Override
         public void onAdReceive() {
             //展示广告
-            bannerView.showAd();
+//            bannerView.showAd();
 
         }
 
@@ -275,22 +275,22 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         }
     };
 
-    public void createBannerAd() {
-        //此广告位为Demo专用，广告的展示不产生费用
-        String adUnitId = "847182F1E4B28774525113F0C57174E7";
-        //创建旗帜广告，传入广告位ID
-        bannerView = IFLYBannerAd.createBannerAd(this, adUnitId);
-        //设置请求的广告尺寸
-        bannerView.setAdSize(IFLYAdSize.BANNER);
-        //设置下载广告前，弹窗提示
-        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
-
-        //请求广告，添加监听器
-        bannerView.loadAd(mAdListener);
-        //将广告添加到布局
-        layout_ads = (LinearLayout)findViewById(R.id.layout_adview);
-        layout_ads.removeAllViews();
-        layout_ads.addView(bannerView);
-
-    }
+//    public void createBannerAd() {
+//        //此广告位为Demo专用，广告的展示不产生费用
+//        String adUnitId = "847182F1E4B28774525113F0C57174E7";
+//        //创建旗帜广告，传入广告位ID
+//        bannerView = IFLYBannerAd.createBannerAd(this, adUnitId);
+//        //设置请求的广告尺寸
+//        bannerView.setAdSize(IFLYAdSize.BANNER);
+//        //设置下载广告前，弹窗提示
+//        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
+//
+//        //请求广告，添加监听器
+//        bannerView.loadAd(mAdListener);
+//        //将广告添加到布局
+//        layout_ads = (LinearLayout)findViewById(R.id.layout_adview);
+//        layout_ads.removeAllViews();
+//        layout_ads.addView(bannerView);
+//
+//    }
 }
