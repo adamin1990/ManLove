@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Ad_Android_SDK">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/src/main/libs/Ad_Android_SDK.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
