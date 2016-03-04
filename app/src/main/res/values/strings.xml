@@ -1,0 +1,12 @@
+<resources tools:ignore="MissingTranslation" xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">美人图</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="networkerror">网络错误</string>
+    <string name="empty">没有数据哎</string>
+    <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="version" formatted="false">版本 %s (%s)</string>
+    <string name="fork_me_on_github">访问github源码</string>
+    <string name="libraries_used">本项目用到了下列开源库</string>
+</resources>
