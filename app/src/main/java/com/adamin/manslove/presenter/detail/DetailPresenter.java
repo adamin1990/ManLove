@@ -11,9 +11,9 @@ import com.adamin.manslove.model.detail.OnDetailListener;
 import com.adamin.manslove.utils.LogUtil;
 import com.adamin.manslove.view.detail.DetailActivity;
 import com.adamin.manslove.view.detail.DetailView;
-import com.iflytek.voiceads.AdError;
-import com.iflytek.voiceads.IFLYAdListener;
-import com.iflytek.voiceads.IFLYBannerAd;
+//import com.iflytek.voiceads.AdError;
+//import com.iflytek.voiceads.IFLYAdListener;
+//import com.iflytek.voiceads.IFLYBannerAd;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 /**

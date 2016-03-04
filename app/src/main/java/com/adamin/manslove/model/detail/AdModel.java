@@ -3,8 +3,8 @@ package com.adamin.manslove.model.detail;
 import android.content.Context;
 import android.widget.LinearLayout;
 
-import com.iflytek.voiceads.IFLYAdListener;
-import com.iflytek.voiceads.IFLYBannerAd;
+//import com.iflytek.voiceads.IFLYAdListener;
+//import com.iflytek.voiceads.IFLYBannerAd;
 
 /**
  * //                           o8888888o
@@ -44,5 +44,5 @@ import com.iflytek.voiceads.IFLYBannerAd;
  * //
  */
 public interface AdModel {
-    void loadAd(IFLYAdListener listener, IFLYBannerAd iflyBannerAd, LinearLayout linearLayout, String appid, Context context);
+//    void loadAd(IFLYAdListener listener, IFLYBannerAd iflyBannerAd, LinearLayout linearLayout, String appid, Context context);
 }

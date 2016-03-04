@@ -5,14 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"></uses-permission>
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <application
         android:name=".base.App"
@@ -55,16 +51,16 @@
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme" />
 
-        <!-- 讯飞 -->
-        <service android:name="com.iflytek.voiceads.update.DownloadService" />
+        <!--&lt;!&ndash; 讯飞 &ndash;&gt;-->
+        <!--<service android:name="com.iflytek.voiceads.update.DownloadService" />-->
 
-        <activity
-            android:name="com.iflytek.voiceads.request.IFLYBrowser"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name="com.iflytek.voiceads.request.IFLYBrowser"-->
+            <!--android:screenOrientation="portrait" />-->
 
-        <meta-data
-            android:name="IFLYTEK_APPKEY_AD"
-            android:value="56cffc31" />
+        <!--<meta-data-->
+            <!--android:name="IFLYTEK_APPKEY_AD"-->
+            <!--android:value="56cffc31" />-->
 
         <!-- umeng -->
         <meta-data

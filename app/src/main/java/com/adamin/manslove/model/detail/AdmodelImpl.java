@@ -4,10 +4,10 @@ import android.content.Context;
 import android.widget.LinearLayout;
 
 import com.adamin.manslove.R;
-import com.iflytek.voiceads.AdKeys;
-import com.iflytek.voiceads.IFLYAdListener;
-import com.iflytek.voiceads.IFLYAdSize;
-import com.iflytek.voiceads.IFLYBannerAd;
+//import com.iflytek.voiceads.AdKeys;
+//import com.iflytek.voiceads.IFLYAdListener;
+//import com.iflytek.voiceads.IFLYAdSize;
+//import com.iflytek.voiceads.IFLYBannerAd;
 
 /**
  * //                           o8888888o
@@ -47,23 +47,23 @@ import com.iflytek.voiceads.IFLYBannerAd;
  * //
  */
 public class AdmodelImpl implements AdModel {
-    @Override
-    public void loadAd(IFLYAdListener listener, IFLYBannerAd bannerView, LinearLayout linearLayout, String appid, Context context) {
-        //此广告位为Demo专用，广告的展示不产生费用
-        String adUnitId = appid;
-        //创建旗帜广告，传入广告位ID
-        bannerView = IFLYBannerAd.createBannerAd(context, adUnitId);
-        //设置请求的广告尺寸
-        bannerView.setAdSize(IFLYAdSize.BANNER);
-        //设置下载广告前，弹窗提示
-        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
-
-        //请求广告，添加监听器
-        bannerView.loadAd(listener);
-        //将广告添加到布局
-        linearLayout.removeAllViews();
-        linearLayout.addView(bannerView);
-    }
+//    @Override
+//    public void loadAd(IFLYAdListener listener, IFLYBannerAd bannerView, LinearLayout linearLayout, String appid, Context context) {
+//        //此广告位为Demo专用，广告的展示不产生费用
+//        String adUnitId = appid;
+//        //创建旗帜广告，传入广告位ID
+//        bannerView = IFLYBannerAd.createBannerAd(context, adUnitId);
+//        //设置请求的广告尺寸
+//        bannerView.setAdSize(IFLYAdSize.BANNER);
+//        //设置下载广告前，弹窗提示
+//        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
+//
+//        //请求广告，添加监听器
+//        bannerView.loadAd(listener);
+//        //将广告添加到布局
+//        linearLayout.removeAllViews();
+//        linearLayout.addView(bannerView);
+//    }
 
 
 }

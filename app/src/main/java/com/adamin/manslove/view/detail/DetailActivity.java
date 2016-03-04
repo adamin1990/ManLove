@@ -27,11 +27,11 @@ import com.adamin.manslove.utils.LogUtil;
 import com.adamin.manslove.utils.SnackBarUtils;
 import com.adamin.manslove.utils.StatusBarCompact;
 import com.adamin.manslove.utils.ViewPagerFixed;
-import com.iflytek.voiceads.AdError;
-import com.iflytek.voiceads.AdKeys;
-import com.iflytek.voiceads.IFLYAdListener;
-import com.iflytek.voiceads.IFLYAdSize;
-import com.iflytek.voiceads.IFLYBannerAd;
+//import com.iflytek.voiceads.AdError;
+//import com.iflytek.voiceads.AdKeys;
+//import com.iflytek.voiceads.IFLYAdListener;
+//import com.iflytek.voiceads.IFLYAdSize;
+//import com.iflytek.voiceads.IFLYBannerAd;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -235,45 +235,45 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
 
     }
 
-    IFLYAdListener mAdListener = new IFLYAdListener(){
-
-        /**
-         * 广告请求成功
-         */
-        @Override
-        public void onAdReceive() {
-            //展示广告
-//            bannerView.showAd();
-
-        }
-
-        /**
-         * 广告请求失败
-         */
-        @Override
-        public void onAdFailed(AdError error) {
-        }
-
-        /**
-         * 广告被点击
-         */
-        @Override
-        public void onAdClick() {
-        }
-
-        /**
-         * 广告被关闭
-         */
-        @Override
-        public void onAdClose() {
-        }
-
-        @Override
-        public void onAdExposure() {
-            // TODO Auto-generated method stub
-
-        }
-    };
+//    IFLYAdListener mAdListener = new IFLYAdListener(){
+//
+//        /**
+//         * 广告请求成功
+//         */
+//        @Override
+//        public void onAdReceive() {
+//            //展示广告
+////            bannerView.showAd();
+//
+//        }
+//
+//        /**
+//         * 广告请求失败
+//         */
+//        @Override
+//        public void onAdFailed(AdError error) {
+//        }
+//
+//        /**
+//         * 广告被点击
+//         */
+//        @Override
+//        public void onAdClick() {
+//        }
+//
+//        /**
+//         * 广告被关闭
+//         */
+//        @Override
+//        public void onAdClose() {
+//        }
+//
+//        @Override
+//        public void onAdExposure() {
+//            // TODO Auto-generated method stub
+//
+//        }
+//    };
 
 //    public void createBannerAd() {
 //        //此广告位为Demo专用，广告的展示不产生费用
