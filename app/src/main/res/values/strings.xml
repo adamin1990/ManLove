@@ -1,4 +1,4 @@
-<resources tools:ignore="MissingTranslation" xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">美人图</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="networkerror">网络错误</string>
@@ -9,4 +9,7 @@
     <string name="version" formatted="false">版本 %s (%s)</string>
     <string name="fork_me_on_github">访问github源码</string>
     <string name="libraries_used">本项目用到了下列开源库</string>
+    <string name="navigation_drawer_open">开</string>
+    <string name="navigation_drawer_close">关</string>
+    <string name="title_activity_meizi_tu">MeiziTuActivity</string>
 </resources>

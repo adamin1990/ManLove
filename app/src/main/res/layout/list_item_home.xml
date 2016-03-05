@@ -3,17 +3,17 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/dimen300"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/dimen5"
     app:cardCornerRadius="@dimen/dimen2"
-    app:cardElevation="@dimen/dimen10"
-    app:contentPadding="@dimen/dimen1"
+    android:layout_margin="@dimen/dimen1"
+    app:cardElevation="@dimen/dimen2"
     android:clickable="true"
-    android:foreground="@drawable/ripple"
 
     >
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    <!--    android:foreground="@drawable/ripple"
+-->
+<!--<FrameLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
     <ImageView
         android:id="@+id/img"
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/dimen30"
         android:layout_gravity="bottom"
         android:background="#90000000">
 
@@ -34,6 +34,6 @@
             android:text="10images"
             android:textColor="@android:color/white" />
     </FrameLayout>
-    </FrameLayout>
+    <!--</FrameLayout>-->
 
 </android.support.v7.widget.CardView>
