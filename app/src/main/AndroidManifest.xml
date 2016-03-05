@@ -3,13 +3,14 @@
     package="com.adamin.manslove">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 移除开机启动 -->
+    <!-- <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
-    <!--<uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />-->
-    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
-    <!--<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+    <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
     <application
         android:name=".base.App"
         android:allowBackup="true"
@@ -34,33 +35,37 @@
             android:enabled="true"
             android:exported="true" />
 
-        <receiver android:name=".service.BootBroadCastReceiver">
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+        <!-- <receiver android:name=".service.BootBroadCastReceiver"> -->
+        <!-- <intent-filter android:priority="1000"> -->
+        <!-- <action android:name="android.intent.action.BOOT_COMPLETED" /> -->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </receiver>
+
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
 
         <activity
             android:name=".view.search.SearchActivity"
             android:label="@string/title_activity_search"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".view.detail.DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme" />
 
-        <!--&lt;!&ndash; 讯飞 &ndash;&gt;-->
-        <!--<service android:name="com.iflytek.voiceads.update.DownloadService" />-->
+        <!-- &lt;!&ndash; 讯飞 &ndash;&gt; -->
+        <!-- <service android:name="com.iflytek.voiceads.update.DownloadService" /> -->
 
-        <!--<activity-->
-            <!--android:name="com.iflytek.voiceads.request.IFLYBrowser"-->
-            <!--android:screenOrientation="portrait" />-->
 
-        <!--<meta-data-->
-            <!--android:name="IFLYTEK_APPKEY_AD"-->
-            <!--android:value="56cffc31" />-->
+        <!-- <activity -->
+        <!-- android:name="com.iflytek.voiceads.request.IFLYBrowser" -->
+        <!-- android:screenOrientation="portrait" /> -->
+
+
+        <!-- <meta-data -->
+        <!-- android:name="IFLYTEK_APPKEY_AD" -->
+        <!-- android:value="56cffc31" /> -->
+
 
         <!-- umeng -->
         <meta-data
@@ -72,14 +77,18 @@
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService"></service>
+            android:process=":DownloadingService" />
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".view.about.AboutActivity"
             android:label="@string/title_activity_about"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.meizitu.MeiziTuActivity"
+            android:label="@string/title_activity_meizi_tu"
             android:theme="@style/AppTheme"></activity>
     </application>
 
