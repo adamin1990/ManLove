@@ -15,4 +15,7 @@ public class Constant {
     public static final String ACTION_NETWORK_CHANCHED = Context.CONNECTIVITY_SERVICE;
     public static final String ACTION_NETWORK_OPEN = "OPEN";
     public static final String ACTION_NETWORK_CLOSE = "CLOSE";
+    public static final String MEIZITU = "http://www.ourhfuu.com/meizitu.php?since_id=";
+    public static final String MEIZITUREFRESH = "http://www.ourhfuu.com/meizitu.php?max_id=";
+
 }

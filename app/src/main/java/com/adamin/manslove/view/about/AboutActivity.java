@@ -2,6 +2,7 @@ package com.adamin.manslove.view.about;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.adamin.manslove.BuildConfig;
 import com.adamin.manslove.R;
+import com.adamin.manslove.utils.StatusBarCompact;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,7 +48,7 @@ public class AboutActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("关于");
 
         version.setText(getString(R.string.version, BuildConfig.VERSION_NAME, BuildConfig.FLAVOR));
-
+        StatusBarCompact.compat(this, Color.parseColor("#424242"));
         LibrariesAdapter adapter = new LibrariesAdapter();
 
         adapter.add("JakeWharton / butterknife", "https://jakewharton.github.io/butterknife/");

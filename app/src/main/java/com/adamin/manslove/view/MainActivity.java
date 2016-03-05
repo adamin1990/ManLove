@@ -12,7 +12,10 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
@@ -30,6 +33,7 @@ import com.adamin.manslove.utils.LogUtil;
 import com.adamin.manslove.utils.SnackBarUtils;
 import com.adamin.manslove.utils.StatusBarCompact;
 import com.adamin.manslove.view.main.MainView;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 import com.umeng.analytics.MobclickAgent;
@@ -58,6 +62,8 @@ public class MainActivity extends BaseActivity implements MainView {
     ImageView imglogo;
     @Bind(R.id.collap)
     CollapsingToolbarLayout collapsingToolbarLayout;
+    @Bind(R.id.drawer)
+    DrawerLayout drawerLayout;
     private MainAdapter adapter;
     private AlertDialog alertDialog;
     private MainPresenter mainPresenter;
@@ -71,15 +77,25 @@ public class MainActivity extends BaseActivity implements MainView {
         ButterKnife.bind(this);
         init();
         UmengUpdateAgent.update(this);
+        startService(new Intent(MainActivity.this,NetWorkService.class));
     }
 
 
     private void init() {
 
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitle("美人图");
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
         alertDialog = DialogUtil.buildCustomDialog(MainActivity.this, "正在获取tab数据,请稍后");
         tabModels = new ArrayList<>();
         adapter = new MainAdapter(getSupportFragmentManager(), tabModels);
@@ -137,7 +153,15 @@ public class MainActivity extends BaseActivity implements MainView {
 
             }
         });
-        StatusBarCompact.compat(this,Color.parseColor("#212121"));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT&&Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+//            SystemBarTintManager systemBarTintManager=new SystemBarTintManager(this);
+//            systemBarTintManager.setStatusBarTintEnabled(true);
+//            systemBarTintManager.setStatusBarTintColor(Color.parseColor("#212121"));
+            //         Set the padding to match the Status Bar height
+//            toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        }
+        StatusBarCompact.compat(this,Color.parseColor("#424242"));
+
     }
 
     @Override
@@ -195,12 +219,22 @@ public class MainActivity extends BaseActivity implements MainView {
 
 
     }
+
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
     }
+
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }
