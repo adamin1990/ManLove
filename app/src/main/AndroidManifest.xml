@@ -18,7 +18,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,10 +49,12 @@
         <activity
             android:name=".view.search.SearchActivity"
             android:label="@string/title_activity_search"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.detail.DetailActivity"
             android:label="@string/title_activity_detail"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
         <!-- &lt;!&ndash; 讯飞 &ndash;&gt; -->
@@ -85,10 +89,24 @@
         <activity
             android:name=".view.about.AboutActivity"
             android:label="@string/title_activity_about"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.meizitu.MeiziTuActivity"
             android:label="@string/title_activity_meizi_tu"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.meizitu.MeiZiDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.liebao.LiebaoActivity"
+            android:label="@string/title_activity_liebao"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.liebao.LieBaoAlbumDetailActivity"
+            android:label="@string/title_activity_lie_bao_album_detail"
             android:theme="@style/AppTheme"></activity>
     </application>
 

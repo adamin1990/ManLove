@@ -3,27 +3,48 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_meizitu"
-            android:icon="@mipmap/ic_launcher"
+            android:id="@+id/nav_mzt"
+            android:icon="@drawable/ic_action_meizitu"
             android:title="meizitu.com" />
         <item
-            android:id="@+id/nav_a"
-            android:icon="@mipmap/ic_launcher"
-            android:title="敬请期待" />
+            android:id="@+id/nav_liebao"
+            android:icon="@drawable/ic_action_liebao"
+            android:title="猎豹美图" />
+        <item
+            android:id="@+id/nav_gank"
+            android:icon="@drawable/ic_action_gan"
+            android:title="Gank.io" />
+        <item
+            android:id="@+id/nav_huasheng"
+            android:icon="@drawable/ic_action_name"
+            android:title="华声" />
+        <item
+            android:id="@+id/nav_juedui"
+            android:icon="@drawable/ic_action_juedui"
+            android:title="绝对领域" />
+        <item
+            android:id="@+id/nav_lexun"
+            android:icon="@drawable/ic_action_lexun"
+            android:title="乐讯" />
+        <item
+            android:id="@+id/nav_tiangou"
+            android:icon="@drawable/ic_action_tiangou"
+            android:title="天狗" />
 
     </group>
 
-    <!--<item android:title="联系">-->
-        <!--<menu>-->
+    <item android:title="other">
+        <menu>
             <!--<item-->
-                <!--android:id="@+id/nav_share"-->
-                <!--android:icon="@drawable/ic_action_about"-->
-                <!--android:title="分享" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_about"-->
-                <!--android:icon="@drawable/ic_action_about"-->
-                <!--android:title="关于" />-->
-        <!--</menu>-->
-    <!--</item>-->
+                <!--android:id="@+id/nav_donate"-->
+                <!--android:icon="@drawable/ic_action_donate"-->
+                <!--android:title="捐赠" />-->
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_action_share"
+                android:title="分享" />
+
+        </menu>
+    </item>
 
 </menu>

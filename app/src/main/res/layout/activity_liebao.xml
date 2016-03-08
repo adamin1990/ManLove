@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.adamin.manslove.view.meizitu.MeiziTuActivity">
+    tools:context="com.adamin.manslove.view.liebao.LiebaoActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -18,11 +18,18 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            app:tabGravity="center"
+            app:tabMode="scrollable"
+            android:layout_height="@dimen/dimen30"></android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_meizi_tu" />
+    <include layout="@layout/content_liebao" />
 
 
 </android.support.design.widget.CoordinatorLayout>
