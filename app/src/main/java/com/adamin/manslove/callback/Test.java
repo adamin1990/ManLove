@@ -1,12 +1,6 @@
-package com.adamin.manslove.presenter.search;
+package com.adamin.manslove.callback;
 
-import com.adamin.manslove.domain.HomeData;
-import com.adamin.manslove.model.main.OnMainListener;
-import com.adamin.manslove.model.search.SearchModel;
-import com.adamin.manslove.model.search.SearchModelImpl;
-import com.adamin.manslove.view.search.SearchView;
-
-import java.util.List;
+import com.adamin.manslove.domain.LieBaoAlbumWrapper;
 
 /**
  * //                           o8888888o
@@ -39,54 +33,11 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-02-27-15:58.
+ * //         Created by LiTao on 2016-03-08-0:17.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class SearchPresenter implements OnMainListener{
-    private SearchView searchView;
-    private SearchModel searchModel;
-
-    public SearchPresenter(SearchView searchView) {
-        this.searchView = searchView;
-        searchModel=new SearchModelImpl();
-    }
-    public void fetchData(Object tag, String keywords, int page, String pagesize){
-        searchModel.searchData(tag,keywords,page,pagesize,this);
-    }
-    public void cancel(Object tag){
-        searchModel.cancel(tag);
-    }
-    @Override
-    public void before() {
-        searchView.showSearching();
-
-    }
-
-    @Override
-    public void after() {
-
-
-    }
-
-    @Override
-    public void success(String response) {
-
-    }
-
-    @Override
-    public void success(List<?> tabModels) {
-        searchView.setData((List<HomeData>) tabModels);
-        searchView.hideSearching();
-
-
-    }
-
-    @Override
-    public void error(Exception e) {
-        searchView.showError(e);
-
-    }
+public abstract class Test extends CommonCallback<LieBaoAlbumWrapper> {
 }

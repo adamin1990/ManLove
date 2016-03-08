@@ -53,10 +53,10 @@ public class SearchActivity extends BaseActivity implements SearchView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        alertDialog= DialogUtil.buildCustomCancelDialog(SearchActivity.this,"正在搜索");
         Intent intent = getIntent();
         query = intent.getStringExtra("query");
         superRecyclerView = (SuperRecyclerView) findViewById(R.id.superrecycerview);
-        alertDialog= DialogUtil.buildCustomCancelDialog(SearchActivity.this,"正在搜索");
         homeDatas=new ArrayList<>();
         gridLayoutManager=new GridLayoutManager(SearchActivity.this,2);
         adapter=new SearchAdapter(homeDatas);
@@ -105,7 +105,9 @@ public class SearchActivity extends BaseActivity implements SearchView {
 
     @Override
     public void hideSearching() {
-        alertDialog.dismiss();
+        if(alertDialog!=null){
+            alertDialog.dismiss();
+        }
 
     }
 
@@ -130,7 +132,13 @@ public class SearchActivity extends BaseActivity implements SearchView {
 
     @Override
     protected void onDestroy() {
-        searchPresenter.cancel(this);
+        if(alertDialog!=null){
+            alertDialog.dismiss();
+            alertDialog=null;
+        }if(searchPresenter!=null){
+            searchPresenter.cancel(this);
+
+        }
         super.onDestroy();
     }
 }

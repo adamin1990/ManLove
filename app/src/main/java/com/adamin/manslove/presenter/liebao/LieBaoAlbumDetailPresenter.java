@@ -1,12 +1,10 @@
-package com.adamin.manslove.presenter.search;
+package com.adamin.manslove.presenter.liebao;
 
-import com.adamin.manslove.domain.HomeData;
-import com.adamin.manslove.model.main.OnMainListener;
-import com.adamin.manslove.model.search.SearchModel;
-import com.adamin.manslove.model.search.SearchModelImpl;
-import com.adamin.manslove.view.search.SearchView;
-
-import java.util.List;
+import com.adamin.manslove.domain.LieBaoAlbumDetailWrapper;
+import com.adamin.manslove.model.liebao.LieBaoAlbumDetailModel;
+import com.adamin.manslove.model.liebao.LieBaoAlbumDetailModelImpl;
+import com.adamin.manslove.model.liebao.LieBaoAlbunDetailListener;
+import com.adamin.manslove.view.liebao.LieBaoAlbumDetailView;
 
 /**
  * //                           o8888888o
@@ -39,54 +37,53 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-02-27-15:58.
+ * //         Created by LiTao on 2016-03-08-10:45.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class SearchPresenter implements OnMainListener{
-    private SearchView searchView;
-    private SearchModel searchModel;
+public class LieBaoAlbumDetailPresenter implements LieBaoAlbunDetailListener {
+    private LieBaoAlbumDetailView detailView;
+    private LieBaoAlbumDetailModel detailModel;
 
-    public SearchPresenter(SearchView searchView) {
-        this.searchView = searchView;
-        searchModel=new SearchModelImpl();
+    public LieBaoAlbumDetailPresenter(LieBaoAlbumDetailView detailView) {
+        this.detailView = detailView;
+        detailModel=new LieBaoAlbumDetailModelImpl();
     }
-    public void fetchData(Object tag, String keywords, int page, String pagesize){
-        searchModel.searchData(tag,keywords,page,pagesize,this);
+
+    public void fetchData(Object tag,String category,String id,boolean before){
+        detailModel.fetchData(tag,category,id,this,before);
     }
     public void cancel(Object tag){
-        searchModel.cancel(tag);
+        detailModel.candelFetch(tag);
     }
+
     @Override
     public void before() {
-        searchView.showSearching();
+        detailView.showLoading();
 
     }
 
     @Override
     public void after() {
-
-
-    }
-
-    @Override
-    public void success(String response) {
+        detailView.hideLoaidng();
 
     }
 
     @Override
-    public void success(List<?> tabModels) {
-        searchView.setData((List<HomeData>) tabModels);
-        searchView.hideSearching();
-
-
+    public void success(LieBaoAlbumDetailWrapper albumDetailWrapper, boolean before) {
+        if(before){
+            detailView.setDataBefore(albumDetailWrapper);
+        }else{
+            detailView.setDataAfter(albumDetailWrapper);
+        }
     }
+
 
     @Override
     public void error(Exception e) {
-        searchView.showError(e);
+        detailView.showError(e);
 
     }
 }

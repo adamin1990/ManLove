@@ -1,10 +1,10 @@
-package com.adamin.manslove.presenter.search;
+package com.adamin.manslove.presenter.liebao;
 
-import com.adamin.manslove.domain.HomeData;
-import com.adamin.manslove.model.main.OnMainListener;
-import com.adamin.manslove.model.search.SearchModel;
-import com.adamin.manslove.model.search.SearchModelImpl;
-import com.adamin.manslove.view.search.SearchView;
+import com.adamin.manslove.domain.LieBaoTab;
+import com.adamin.manslove.model.liebao.LieBaoListener;
+import com.adamin.manslove.model.liebao.LieBaoModel;
+import com.adamin.manslove.model.liebao.LieBaoModelImpl;
+import com.adamin.manslove.view.liebao.LieBaoView;
 
 import java.util.List;
 
@@ -39,54 +39,48 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-02-27-15:58.
+ * //         Created by LiTao on 2016-03-07-17:57.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class SearchPresenter implements OnMainListener{
-    private SearchView searchView;
-    private SearchModel searchModel;
+public class LieBaoTagPresenter implements LieBaoListener {
+    private LieBaoModel lieBaoModel;
+    private LieBaoView lieBaoView;
 
-    public SearchPresenter(SearchView searchView) {
-        this.searchView = searchView;
-        searchModel=new SearchModelImpl();
+    public LieBaoTagPresenter(LieBaoView lieBaoView) {
+        this.lieBaoView = lieBaoView;
+        lieBaoModel=new LieBaoModelImpl();
     }
-    public void fetchData(Object tag, String keywords, int page, String pagesize){
-        searchModel.searchData(tag,keywords,page,pagesize,this);
+
+    public void getTags(Object tag){
+        lieBaoModel.fethcData(tag,this);
     }
-    public void cancel(Object tag){
-        searchModel.cancel(tag);
+    public void cancelGet(Object tag){
+        lieBaoModel.cancel(tag);
     }
+
     @Override
     public void before() {
-        searchView.showSearching();
+        lieBaoView.showLoading();
 
     }
 
     @Override
     public void after() {
-
-
-    }
-
-    @Override
-    public void success(String response) {
+        lieBaoView.hideLoading();
 
     }
 
     @Override
     public void success(List<?> tabModels) {
-        searchView.setData((List<HomeData>) tabModels);
-        searchView.hideSearching();
-
-
+          lieBaoView.setData((List<LieBaoTab>) tabModels);
     }
 
     @Override
     public void error(Exception e) {
-        searchView.showError(e);
+        lieBaoView.showError(e);
 
     }
 }

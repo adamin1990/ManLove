@@ -1,10 +1,12 @@
-package com.adamin.manslove.callback;
+package com.adamin.manslove.model.meizitu;
 
+import com.adamin.manslove.callback.MeiZiTuCallback;
 import com.adamin.manslove.domain.MeiZiTuWrapper;
-import com.google.gson.Gson;
-import com.zhy.http.okhttp.callback.Callback;
+import com.adamin.manslove.utils.Constant;
+import com.zhy.http.okhttp.OkHttpUtils;
 
-import okhttp3.Response;
+import okhttp3.Call;
+import okhttp3.Request;
 
 /**
  * //                           o8888888o
@@ -37,16 +39,54 @@ import okhttp3.Response;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-03-05-14:44.
+ * //         Created by LiTao on 2016-03-05-22:30.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public abstract class MeiZiTuCallback extends Callback<MeiZiTuWrapper> {
+public class MeiziTuModelImpl implements MeiZiTuModel {
     @Override
-    public MeiZiTuWrapper parseNetworkResponse(Response response) throws Exception {
-        String json=response.body().string();
-        return new Gson().fromJson(json,MeiZiTuWrapper.class);
+    public void fetchData(String sinceid, Object tag, final MeiZituListener meiZituListener) {
+        OkHttpUtils.get()
+                .url(Constant.MEIZITU+sinceid)
+                .tag(tag)
+                .build()
+                .execute(new MeiZiTuCallback() {
+                    @Override
+                    public void onBefore(Request request) {
+                        meiZituListener.before();
+                        super.onBefore(request);
+                    }
+
+                    @Override
+                    public void onError(Call call, Exception e) {
+                            meiZituListener.error(e);
+                    }
+
+                    @Override
+                    public void inProgress(float progress) {
+                        meiZituListener.progress(progress);
+                        super.inProgress(progress);
+                    }
+
+                    @Override
+                    public void onResponse(MeiZiTuWrapper response) {
+                       meiZituListener.success(response);
+                    }
+
+                    @Override
+                    public void onAfter() {
+                        meiZituListener.after();
+                        super.onAfter();
+                    }
+                });
+    }
+
+    @Override
+    public void cancelFecth(Object tag) {
+        OkHttpUtils.getInstance()
+                .cancelTag(tag);
+
     }
 }

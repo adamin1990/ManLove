@@ -36,5 +36,12 @@ public class UtilsSharedPreferences {
     public String getChannel(){
         return  preferences.getString("channel","");
     }
+    public void setIsfirst(boolean first){
+        edit.putBoolean("first",first).commit();
+
+    }
+    public boolean getIsFirst(){
+        return preferences.getBoolean("first",true);
+    }
 
 }

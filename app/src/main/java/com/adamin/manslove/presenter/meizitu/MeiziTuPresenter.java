@@ -1,10 +1,10 @@
-package com.adamin.manslove.model.meizitu;
+package com.adamin.manslove.presenter.meizitu;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.adamin.manslove.domain.MeiZiTuWrapper;
+import com.adamin.manslove.model.meizitu.MeiZiTuModel;
+import com.adamin.manslove.model.meizitu.MeiZituListener;
+import com.adamin.manslove.model.meizitu.MeiziTuModelImpl;
+import com.adamin.manslove.view.meizitu.MeiZiTuView;
 
 /**
  * //                           o8888888o
@@ -37,74 +37,51 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-03-05-14:43.
+ * //         Created by LiTao on 2016-03-05-22:34.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class MeiZiTuWrapper {
-    @SerializedName("status")
-    @Expose
-    private Integer status;
-    @SerializedName("msg")
-    @Expose
-    private String msg;
-    @SerializedName("data")
-    @Expose
-    private List<MeiZiTu> data = new ArrayList<MeiZiTu>();
+public class MeiziTuPresenter implements MeiZituListener {
+    private MeiZiTuView meiZiTuView;
+    private MeiZiTuModel meiZiTuModel;
 
-    /**
-     *
-     * @return
-     * The status
-     */
-    public Integer getStatus() {
-        return status;
+    public MeiziTuPresenter(MeiZiTuView meiZiTuView) {
+        this.meiZiTuView = meiZiTuView;
+        meiZiTuModel=new MeiziTuModelImpl();
     }
 
-    /**
-     *
-     * @param status
-     * The status
-     */
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void fechData(String siceid,Object tag){
+        meiZiTuModel.fetchData(siceid,tag,this);
+    }
+    public void cancelFetch(Object tag){
+        meiZiTuModel.cancelFecth(tag);
     }
 
-    /**
-     *
-     * @return
-     * The msg
-     */
-    public String getMsg() {
-        return msg;
+    @Override
+    public void before() {
+        meiZiTuView.showLoading();
+
     }
 
-    /**
-     *
-     * @param msg
-     * The msg
-     */
-    public void setMsg(String msg) {
-        this.msg = msg;
+    @Override
+    public void after() {
+        meiZiTuView.hideLoading();
+
     }
 
-    /**
-     *
-     * @return
-     * The data
-     */
-    public List<MeiZiTu> getData() {
-        return data;
+    @Override
+    public void success(MeiZiTuWrapper meiZiTuWrapper) {
+            meiZiTuView.setData(meiZiTuWrapper.getData());
     }
 
-    /**
-     *
-     * @param data
-     * The data
-     */
-    public void setData(List<MeiZiTu> data) {
-        this.data = data;
+    @Override
+    public void error(Exception e) {
+              meiZiTuView.showError(e);
+    }
+
+    @Override
+    public void progress(float progress) {
     }
 }

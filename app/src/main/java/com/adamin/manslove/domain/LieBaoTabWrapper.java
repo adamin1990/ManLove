@@ -1,11 +1,9 @@
-package com.adamin.manslove.presenter.search;
+package com.adamin.manslove.domain;
 
-import com.adamin.manslove.domain.HomeData;
-import com.adamin.manslove.model.main.OnMainListener;
-import com.adamin.manslove.model.search.SearchModel;
-import com.adamin.manslove.model.search.SearchModelImpl;
-import com.adamin.manslove.view.search.SearchView;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,54 +37,75 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-02-27-15:58.
+ * //         Created by LiTao on 2016-03-07-11:59.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class SearchPresenter implements OnMainListener{
-    private SearchView searchView;
-    private SearchModel searchModel;
+public class LieBaoTabWrapper {
 
-    public SearchPresenter(SearchView searchView) {
-        this.searchView = searchView;
-        searchModel=new SearchModelImpl();
-    }
-    public void fetchData(Object tag, String keywords, int page, String pagesize){
-        searchModel.searchData(tag,keywords,page,pagesize,this);
-    }
-    public void cancel(Object tag){
-        searchModel.cancel(tag);
-    }
-    @Override
-    public void before() {
-        searchView.showSearching();
+    @SerializedName("status")
+    @Expose
+    private Integer status;
+    @SerializedName("msg")
+    @Expose
+    private String msg;
+    @SerializedName("data")
+    @Expose
+    private List<LieBaoTab> data = new ArrayList<LieBaoTab>();
 
-    }
-
-    @Override
-    public void after() {
-
-
+    /**
+     *
+     * @return
+     * The status
+     */
+    public Integer getStatus() {
+        return status;
     }
 
-    @Override
-    public void success(String response) {
-
+    /**
+     *
+     * @param status
+     * The status
+     */
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
-    @Override
-    public void success(List<?> tabModels) {
-        searchView.setData((List<HomeData>) tabModels);
-        searchView.hideSearching();
-
-
+    /**
+     *
+     * @return
+     * The msg
+     */
+    public String getMsg() {
+        return msg;
     }
 
-    @Override
-    public void error(Exception e) {
-        searchView.showError(e);
+    /**
+     *
+     * @param msg
+     * The msg
+     */
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
+    /**
+     *
+     * @return
+     * The data
+     */
+    public List<LieBaoTab> getData() {
+        return data;
+    }
+
+    /**
+     *
+     * @param data
+     * The data
+     */
+    public void setData(List<LieBaoTab> data) {
+        this.data = data;
     }
 }

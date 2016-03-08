@@ -1,12 +1,9 @@
-package com.adamin.manslove.presenter.search;
+package com.adamin.manslove.model.liebao;
 
-import com.adamin.manslove.domain.HomeData;
-import com.adamin.manslove.model.main.OnMainListener;
-import com.adamin.manslove.model.search.SearchModel;
-import com.adamin.manslove.model.search.SearchModelImpl;
-import com.adamin.manslove.view.search.SearchView;
+import android.support.annotation.Nullable;
 
-import java.util.List;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * //                           o8888888o
@@ -39,54 +36,99 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-02-27-15:58.
+ * //         Created by LiTao on 2016-03-08-1:52.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class SearchPresenter implements OnMainListener{
-    private SearchView searchView;
-    private SearchModel searchModel;
+public class LieBaoInfo {
 
-    public SearchPresenter(SearchView searchView) {
-        this.searchView = searchView;
-        searchModel=new SearchModelImpl();
-    }
-    public void fetchData(Object tag, String keywords, int page, String pagesize){
-        searchModel.searchData(tag,keywords,page,pagesize,this);
-    }
-    public void cancel(Object tag){
-        searchModel.cancel(tag);
-    }
-    @Override
-    public void before() {
-        searchView.showSearching();
+    @SerializedName("prev")
+    @Expose
+    @Nullable
+    private String prev;
+    @SerializedName("next")
+    @Expose
+    @Nullable
+    private String next;
+    @SerializedName("up_num")
+    @Expose
+    private Integer upNum;
+    @SerializedName("category")
+    @Expose
+    private String category;
 
-    }
-
-    @Override
-    public void after() {
-
-
-    }
-
-    @Override
-    public void success(String response) {
-
+    /**
+     *
+     * @return
+     * The prev
+     */
+    public String getPrev() {
+        return prev;
     }
 
-    @Override
-    public void success(List<?> tabModels) {
-        searchView.setData((List<HomeData>) tabModels);
-        searchView.hideSearching();
-
-
+    /**
+     *
+     * @param prev
+     * The prev
+     */
+    public void setPrev(String prev) {
+        this.prev = prev;
     }
 
-    @Override
-    public void error(Exception e) {
-        searchView.showError(e);
-
+    /**
+     *
+     * @return
+     * The next
+     */
+    public String getNext() {
+        return next;
     }
+
+    /**
+     *
+     * @param next
+     * The next
+     */
+    public void setNext(String next) {
+        this.next = next;
+    }
+
+    /**
+     *
+     * @return
+     * The upNum
+     */
+    public Integer getUpNum() {
+        return upNum;
+    }
+
+    /**
+     *
+     * @param upNum
+     * The up_num
+     */
+    public void setUpNum(Integer upNum) {
+        this.upNum = upNum;
+    }
+
+    /**
+     *
+     * @return
+     * The category
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     *
+     * @param category
+     * The category
+     */
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
 }

@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -20,11 +22,16 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.adamin.manslove.R;
 import com.adamin.manslove.adapter.MainAdapter;
+import com.adamin.manslove.base.App;
 import com.adamin.manslove.base.BaseActivity;
 import com.adamin.manslove.domain.TabModel;
 import com.adamin.manslove.presenter.main.MainPresenter;
@@ -32,7 +39,9 @@ import com.adamin.manslove.service.NetWorkService;
 import com.adamin.manslove.utils.LogUtil;
 import com.adamin.manslove.utils.SnackBarUtils;
 import com.adamin.manslove.utils.StatusBarCompact;
+import com.adamin.manslove.view.liebao.LiebaoActivity;
 import com.adamin.manslove.view.main.MainView;
+import com.adamin.manslove.view.meizitu.MeiziTuActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -47,7 +56,7 @@ import adamin.toolkits.utils.DialogUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView, NavigationView.OnNavigationItemSelectedListener {
     @Bind(R.id.appbarlayout)
     AppBarLayout appBarLayout;
     @Bind(R.id.toolbar)
@@ -64,10 +73,15 @@ public class MainActivity extends BaseActivity implements MainView {
     CollapsingToolbarLayout collapsingToolbarLayout;
     @Bind(R.id.drawer)
     DrawerLayout drawerLayout;
+    @Bind(R.id.nav_view)
+    NavigationView navigationView;
+    //    @Bind(R.id.nav_view2)
+//    NavigationView navigationView2;
     private MainAdapter adapter;
     private AlertDialog alertDialog;
     private MainPresenter mainPresenter;
     private List<TabModel> tabModels;
+    private AlertDialog showmain;
 
 
     @Override
@@ -77,12 +91,12 @@ public class MainActivity extends BaseActivity implements MainView {
         ButterKnife.bind(this);
         init();
         UmengUpdateAgent.update(this);
-        startService(new Intent(MainActivity.this,NetWorkService.class));
+        startService(new Intent(MainActivity.this, NetWorkService.class));
+
     }
 
 
     private void init() {
-
 
 
         setSupportActionBar(toolbar);
@@ -153,21 +167,45 @@ public class MainActivity extends BaseActivity implements MainView {
 
             }
         });
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT&&Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
 //            SystemBarTintManager systemBarTintManager=new SystemBarTintManager(this);
 //            systemBarTintManager.setStatusBarTintEnabled(true);
 //            systemBarTintManager.setStatusBarTintColor(Color.parseColor("#212121"));
             //         Set the padding to match the Status Bar height
 //            toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         }
-        StatusBarCompact.compat(this,Color.parseColor("#424242"));
+        StatusBarCompact.compat(this, Color.parseColor("#424242"));
+        navigationView.setItemIconTintList(null);
+        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView2.setNavigationItemSelectedListener(this);
+
+        View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout_gonggao, null);
+        showmain = new AlertDialog.Builder(MainActivity.this)
+                .setCancelable(false)
+                .setView(view)
+                .create();
+        Button evaluate = (Button) view.findViewById(R.id.pingjia);
+        evaluate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showmain.dismiss();
+            }
+        });
+        if (App.utilsSharedPreferences.getIsFirst()) {
+            showmain.show();
+            App.utilsSharedPreferences.setIsfirst(false);
+        }
 
     }
 
     @Override
     protected void onDestroy() {
+        if (mainPresenter != null) {
+            mainPresenter.cancel(this);
+
+        }
         super.onDestroy();
-        mainPresenter.cancel(this);
+
     }
 
     @Override
@@ -229,6 +267,7 @@ public class MainActivity extends BaseActivity implements MainView {
         super.onPause();
         MobclickAgent.onPause(this);
     }
+
     public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -236,5 +275,21 @@ public class MainActivity extends BaseActivity implements MainView {
             result = getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_mzt:
+//                drawerLayout.closeDrawer(Gravity.LEFT);
+                startActivity(new Intent(MainActivity.this, MeiziTuActivity.class));
+                return true;
+            case R.id.nav_liebao:
+                startActivity(new Intent(MainActivity.this, LiebaoActivity.class));
+                return true;
+            default:
+                SnackBarUtils.showSnackBar(MainActivity.this, "正在开发(●'◡'●)", SnackBarUtils.INFO);
+                return false;
+        }
     }
 }

@@ -1,10 +1,10 @@
-package com.adamin.manslove.presenter.search;
+package com.adamin.manslove.presenter.liebao;
 
-import com.adamin.manslove.domain.HomeData;
-import com.adamin.manslove.model.main.OnMainListener;
-import com.adamin.manslove.model.search.SearchModel;
-import com.adamin.manslove.model.search.SearchModelImpl;
-import com.adamin.manslove.view.search.SearchView;
+import com.adamin.manslove.domain.LieBaoAlbum;
+import com.adamin.manslove.model.liebao.LieBaoAlbumListener;
+import com.adamin.manslove.model.liebao.LieBaoAlbumModel;
+import com.adamin.manslove.model.liebao.LieBaoAlbumModelImpl;
+import com.adamin.manslove.view.liebao.LieBaoFragmentView;
 
 import java.util.List;
 
@@ -39,54 +39,51 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-02-27-15:58.
+ * //         Created by LiTao on 2016-03-08-0:29.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class SearchPresenter implements OnMainListener{
-    private SearchView searchView;
-    private SearchModel searchModel;
+public class LieBaoAlbumPresenter implements LieBaoAlbumListener {
 
-    public SearchPresenter(SearchView searchView) {
-        this.searchView = searchView;
-        searchModel=new SearchModelImpl();
+    private LieBaoFragmentView fragmentView;
+   private LieBaoAlbumModel lieBaoAlbumModel;
+
+    public LieBaoAlbumPresenter(LieBaoFragmentView fragmentView) {
+        this.fragmentView = fragmentView;
+        lieBaoAlbumModel=new LieBaoAlbumModelImpl();
     }
-    public void fetchData(Object tag, String keywords, int page, String pagesize){
-        searchModel.searchData(tag,keywords,page,pagesize,this);
+
+    public void fetchData(int page,int cate,Object tag){
+        lieBaoAlbumModel.fetchData(page,cate,tag,this);
     }
-    public void cancel(Object tag){
-        searchModel.cancel(tag);
+    public void candel(Object tag){
+        lieBaoAlbumModel.cancel(tag);
     }
+
     @Override
+
     public void before() {
-        searchView.showSearching();
+        fragmentView.showLoading();
 
     }
 
     @Override
     public void after() {
-
-
-    }
-
-    @Override
-    public void success(String response) {
+        fragmentView.hideLoading();
 
     }
 
     @Override
     public void success(List<?> tabModels) {
-        searchView.setData((List<HomeData>) tabModels);
-        searchView.hideSearching();
-
+        fragmentView.setData((List<LieBaoAlbum>) tabModels);
 
     }
 
     @Override
     public void error(Exception e) {
-        searchView.showError(e);
+        fragmentView.showError(e);
 
     }
 }

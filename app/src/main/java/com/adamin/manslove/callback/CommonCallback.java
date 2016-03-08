@@ -1,10 +1,12 @@
-package com.adamin.manslove.model.meizitu;
+package com.adamin.manslove.callback;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.Gson;
+import com.zhy.http.okhttp.callback.Callback;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+import okhttp3.Response;
 
 /**
  * //                           o8888888o
@@ -37,95 +39,19 @@ import java.util.List;
  * //                  别人笑我忒疯癫，我笑自己命太贱；
  * //                  不见满街漂亮妹，哪个归得程序员？
  * //
- * //         Created by LiTao on 2016-03-05-14:42.
+ * //         Created by LiTao on 2016-03-08-0:11.
  * //         Company: QD24so
  * //         Email: 14846869@qq.com
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class MeiZiTu {
-    @SerializedName("id")
-    @Expose
-    private String id;
-    @SerializedName("name")
-    @Expose
-    private String name;
-    @SerializedName("tags")
-    @Expose
-    private List<String> tags = new ArrayList<String>();
-    @SerializedName("imgs")
-    @Expose
-    private List<String> imgs = new ArrayList<String>();
-
-    /**
-     *
-     * @return
-     * The id
-     */
-    public String getId() {
-        return id;
-    }
-
-    /**
-     *
-     * @param id
-     * The id
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    /**
-     *
-     * @return
-     * The name
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     *
-     * @param name
-     * The name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     *
-     * @return
-     * The tags
-     */
-    public List<String> getTags() {
-        return tags;
-    }
-
-    /**
-     *
-     * @param tags
-     * The tags
-     */
-    public void setTags(List<String> tags) {
-        this.tags = tags;
-    }
-
-    /**
-     *
-     * @return
-     * The imgs
-     */
-    public List<String> getImgs() {
-        return imgs;
-    }
-
-    /**
-     *
-     * @param imgs
-     * The imgs
-     */
-    public void setImgs(List<String> imgs) {
-        this.imgs = imgs;
+public abstract class CommonCallback<E>  extends Callback<E> {
+    @Override
+    public E parseNetworkResponse(Response response) throws Exception {
+        String json=response.body().string();
+        Type t = getClass().getGenericSuperclass();
+        Type[] params = ((ParameterizedType) t).getActualTypeArguments();
+        Class<E> cls = (Class<E>) params[0];
+        return new Gson().fromJson(json,cls);
     }
 }
