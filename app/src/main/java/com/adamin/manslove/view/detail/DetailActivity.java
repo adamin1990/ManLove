@@ -64,6 +64,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
     EdgeEffectCompat leftEdge,rightEdge;
     private boolean hide=false;
     private String sh="after";
+    private boolean justone=false;
 //   @Bind(R.id.layout_adview)
 //    LinearLayout layout_ads;
 //    private IFLYBannerAd bannerView;
@@ -81,7 +82,12 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         id=getIntent().getStringExtra("id");
         sh=getIntent().getStringExtra("sh");
         init();
-        getData(id);
+        if(justone){
+
+        }else{
+            getData(id);
+        }
+
         initlistener();
 //        createBannerAd();
 
@@ -150,6 +156,7 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
     }
 
     private void init() {
+        justone=getIntent().getBooleanExtra("justone",false);
         detailPresenter=new DetailPresenter(this);
         detailDatas=new ArrayList<>();
         detailAdapter=new DetailAdapter(getSupportFragmentManager(),detailDatas);

@@ -82,7 +82,7 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
             @Override
             public void onClick(View v) {
                 if(onItemClickListener!=null){
-                    onItemClickListener.OnItemClick(position,holder.imageView);
+                    onItemClickListener.OnItemClick(position,holder.imageView,homeDatas.size());
                 }
             }
         });
@@ -111,6 +111,6 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
         this.onItemClickListener=onItemClickListener;
     }
    public interface OnItemClickListener{
-        void OnItemClick(int position,View view);
+        void OnItemClick(int position,View view,int size);
     }
 }

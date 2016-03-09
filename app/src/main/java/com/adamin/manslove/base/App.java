@@ -2,6 +2,7 @@ package com.adamin.manslove.base;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.adamin.manslove.utils.UtilsSharedPreferences;
 
@@ -44,6 +45,9 @@ import com.adamin.manslove.utils.UtilsSharedPreferences;
  */
 public class App extends Application {
     public static UtilsSharedPreferences utilsSharedPreferences;
+    static  {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
+    }
 
     @Override
     public void onCreate() {

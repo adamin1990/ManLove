@@ -170,11 +170,12 @@ public class MainFragment extends Fragment implements MainFragmentView {
         });
         mainFragmentAdapter.setOnItemClickListener(new MainFragmentAdapter.OnItemClickListener() {
             @Override
-            public void OnItemClick(int position, View view) {
+            public void OnItemClick(int position, View view,int size) {
               ActivityOptionsCompat activityOptionsCompat= ActivityOptionsCompat.makeSceneTransitionAnimation(getActivity(),view,"sharedimage");
                 Intent intent=new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("id",homeDatas.get(position).getId()+"");
                 intent.putExtra("sh","after");
+                intent.putExtra("justone",homeDatas.size()==1?true:false);
                 ActivityCompat.startActivity(getActivity(),intent,activityOptionsCompat.toBundle());
 
             }
