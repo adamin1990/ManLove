@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@color/md_grey_800"
-    tools:context="com.adamin.manslove.view.liebao.LieBaoAlbumDetailActivity">
-    <include layout="@layout/content_lie_bao_album_detail" />
+    tools:context="com.adamin.manslove.view.gank.GankDetailActivity">
+    <include layout="@layout/content_gank_detail" />
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/appbarlayout"
         android:background="@android:color/transparent"
         android:theme="@style/AppTheme.AppBarOverlay">
 
@@ -23,6 +23,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+
 
 
 

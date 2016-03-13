@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/md_grey_800"
-    tools:context="com.adamin.manslove.view.liebao.LieBaoAlbumDetailActivity">
-    <include layout="@layout/content_lie_bao_album_detail" />
+    tools:context="com.adamin.manslove.view.huasheng.HuashengActivity">
+
     <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:id="@+id/tablayout"
+            android:layout_height="@dimen/dimen40"
+            android:background="@color/colorPrimary"></TableLayout>
 
     </android.support.design.widget.AppBarLayout>
 
+    <include layout="@layout/content_huasheng" />
 
 
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

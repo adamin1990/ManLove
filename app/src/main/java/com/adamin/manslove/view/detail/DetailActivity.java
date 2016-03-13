@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.adamin.manslove.R;
@@ -33,6 +34,7 @@ import com.adamin.manslove.utils.ViewPagerFixed;
 //import com.iflytek.voiceads.IFLYAdListener;
 //import com.iflytek.voiceads.IFLYAdSize;
 //import com.iflytek.voiceads.IFLYBannerAd;
+import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -52,6 +54,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
     AppBarLayout appBarLayout;
     @Bind(R.id.pager)
     ViewPagerFixed viewPager;
+    @Bind(R.id.imageview)
+    ImageView imageView;
     private String id;
     private String preid;
     private String nextid;
@@ -83,8 +87,15 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         sh=getIntent().getStringExtra("sh");
         init();
         if(justone){
+            imageView.setVisibility(View.VISIBLE);
+            viewPager.setVisibility(View.GONE);
+         String s=Constant.BASEIMGURL+getIntent().getStringExtra("url");
+            Picasso.with(DetailActivity.this)
+                    .load(Constant.BASEIMGURL+getIntent().getStringExtra("url")).into(imageView);
 
         }else{
+            imageView.setVisibility(View.GONE);
+            viewPager.setVisibility(View.VISIBLE);
             getData(id);
         }
 

@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatDelegate;
 
 import com.adamin.manslove.utils.UtilsSharedPreferences;
+import com.zhy.http.okhttp.OkHttpUtils;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * //                           o8888888o
@@ -52,6 +55,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        OkHttpUtils.getInstance().setConnectTimeout(20, TimeUnit.SECONDS);
         utilsSharedPreferences=new UtilsSharedPreferences(getApplicationContext(),"manslove");
     }
 }

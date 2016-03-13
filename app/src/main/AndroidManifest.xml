@@ -107,6 +107,18 @@
         <activity
             android:name=".view.liebao.LieBaoAlbumDetailActivity"
             android:label="@string/title_activity_lie_bao_album_detail"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.huasheng.HuashengActivity"
+            android:label="@string/title_activity_huasheng"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.gank.GankActivity"
+            android:label="@string/title_activity_gank"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.gank.GankDetailActivity"
+            android:label="@string/title_activity_gank_detail"
             android:theme="@style/AppTheme"></activity>
     </application>
 

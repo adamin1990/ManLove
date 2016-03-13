@@ -39,6 +39,7 @@ import com.adamin.manslove.service.NetWorkService;
 import com.adamin.manslove.utils.LogUtil;
 import com.adamin.manslove.utils.SnackBarUtils;
 import com.adamin.manslove.utils.StatusBarCompact;
+import com.adamin.manslove.view.gank.GankActivity;
 import com.adamin.manslove.view.liebao.LiebaoActivity;
 import com.adamin.manslove.view.main.MainView;
 import com.adamin.manslove.view.meizitu.MeiziTuActivity;
@@ -287,9 +288,22 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
             case R.id.nav_liebao:
                 startActivity(new Intent(MainActivity.this, LiebaoActivity.class));
                 return true;
+            case R.id.nav_gank:
+                startActivity(new Intent(MainActivity.this, GankActivity.class));
+                return true;
             default:
                 SnackBarUtils.showSnackBar(MainActivity.this, "正在开发(●'◡'●)", SnackBarUtils.INFO);
                 return false;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(Gravity.LEFT)){
+            drawerLayout.closeDrawers();
+        }else {
+            super.onBackPressed();
+
         }
     }
 }

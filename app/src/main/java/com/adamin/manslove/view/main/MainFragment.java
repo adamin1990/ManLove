@@ -175,7 +175,8 @@ public class MainFragment extends Fragment implements MainFragmentView {
                 Intent intent=new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra("id",homeDatas.get(position).getId()+"");
                 intent.putExtra("sh","after");
-                intent.putExtra("justone",homeDatas.size()==1?true:false);
+                intent.putExtra("justone",homeDatas.get(position).getItemNum()==1?true:false);
+                intent.putExtra("url",homeDatas.get(position).getImage());
                 ActivityCompat.startActivity(getActivity(),intent,activityOptionsCompat.toBundle());
 
             }

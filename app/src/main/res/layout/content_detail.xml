@@ -7,7 +7,13 @@
     android:fitsSystemWindows="true"
     tools:context="com.adamin.manslove.view.detail.DetailActivity"
     tools:showIn="@layout/activity_detail">
-
+ <ImageView
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:scaleType="centerCrop"
+     android:layout_gravity="center"
+     android:transitionName="sharedimage"
+     android:id="@+id/imageview"/>
  <com.adamin.manslove.utils.ViewPagerFixed
      android:id="@+id/pager"
      android:layout_width="match_parent"
@@ -20,5 +26,6 @@
      android:gravity="bottom"
      android:layout_gravity="bottom"
      android:orientation="vertical" >
+
  </LinearLayout>
 </FrameLayout>

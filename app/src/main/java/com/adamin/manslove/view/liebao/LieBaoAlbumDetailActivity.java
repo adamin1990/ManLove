@@ -40,7 +40,6 @@ public class LieBaoAlbumDetailActivity extends BaseActivity  implements LieBaoAl
     AppBarLayout appBarLayout;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    private PhotoViewAttacher attacher;
     private AlertDialog dialog;
     private LieBaoAlbumDetailPresenter lieBaoAlbumDetailPresenter;
     private boolean hide=false;
@@ -74,7 +73,6 @@ public class LieBaoAlbumDetailActivity extends BaseActivity  implements LieBaoAl
 
     private void init() {
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         afterid=getIntent().getStringExtra("id");
         categary=getIntent().getStringExtra("category");

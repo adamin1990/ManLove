@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fitsSystemWindows="true"
+    android:background="@color/md_grey_800"
     tools:context="com.adamin.manslove.view.detail.DetailActivity">
 
 

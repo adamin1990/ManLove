@@ -119,7 +119,7 @@ public class LieBaoFragment extends Fragment implements LieBaoFragmentView {
                 intent.putExtra("category",id+"");
                 intent.putExtra("name",lieBaoAlbumList.get(position).getTitle());
                 intent.putExtra("id",lieBaoAlbumList.get(position).getId());
-                ActivityCompat.startActivity(getActivity(),intent,null);
+                ActivityCompat.startActivity(getActivity(),intent,activityOptionsCompat.toBundle());
 
             }
         });
