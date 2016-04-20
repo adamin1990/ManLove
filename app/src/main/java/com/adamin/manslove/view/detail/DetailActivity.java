@@ -1,8 +1,12 @@
 package com.adamin.manslove.view.detail;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,11 +21,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.adamin.manslove.R;
 import com.adamin.manslove.adapter.DetailAdapter;
 import com.adamin.manslove.domain.DetailData;
 import com.adamin.manslove.model.detail.AdmodelImpl;
+import com.adamin.manslove.permission.Func;
+import com.adamin.manslove.permission.Func2;
+import com.adamin.manslove.permission.PermissionUtil;
 import com.adamin.manslove.presenter.detail.DetailPresenter;
 import com.adamin.manslove.utils.ApiUtils;
 import com.adamin.manslove.utils.Constant;
@@ -34,6 +42,11 @@ import com.adamin.manslove.utils.ViewPagerFixed;
 //import com.iflytek.voiceads.IFLYAdListener;
 //import com.iflytek.voiceads.IFLYAdSize;
 //import com.iflytek.voiceads.IFLYBannerAd;
+import com.iflytek.voiceads.AdError;
+import com.iflytek.voiceads.AdKeys;
+import com.iflytek.voiceads.IFLYAdListener;
+import com.iflytek.voiceads.IFLYAdSize;
+import com.iflytek.voiceads.IFLYBannerAd;
 import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -48,6 +61,7 @@ import butterknife.ButterKnife;
 import okhttp3.Call;
 
 public class DetailActivity extends AppCompatActivity implements DetailView,DetailFragment.TapListener{
+    private static final int CODE_ADS = 0X5;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbarlayout)
@@ -69,9 +83,10 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
     private boolean hide=false;
     private String sh="after";
     private boolean justone=false;
-//   @Bind(R.id.layout_adview)
-//    LinearLayout layout_ads;
-//    private IFLYBannerAd bannerView;
+   @Bind(R.id.layout_adview)
+    LinearLayout layout_ads;
+    private IFLYBannerAd bannerView;
+    private PermissionUtil.PermissionRequestObject permissionRequestObject;
 
 
     @Override
@@ -100,9 +115,49 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         }
 
         initlistener();
-//        createBannerAd();
+
+        if (Build.VERSION.SDK_INT >= 23) {
+//            checkPermisson();
+            permissionRequestObject=PermissionUtil.with(this).request(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_PHONE_STATE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    .onAllGranted(new Func() {
+                        @Override
+                        protected void call() {
+                            LogUtil.error(DetailActivity.class,"都通过了");
+                            createBannerAd();
+                        }
+                    })
+                    .onAnyDenied(new Func() {
+                        @Override
+                        protected void call() {
+                            Toast.makeText(DetailActivity.this,"你禁止了某些权限",Toast.LENGTH_SHORT).show();
+                            onBackPressed();
+                        }
+                    })
+//                    .onResult(new Func2() {
+//                        @Override
+//                        protected void call(int requestCode, String[] permissions, int[] grantResults) {
+//                            for (int i = 0; i < permissions.length; i++) {
+//                                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) doOnPermissionGranted(permissions[i]);
+//                                else doOnPermissionDenied(permissions[i]);
+//                            }
+//                        }
+//                    })
+                    .ask(CODE_ADS);
+
+        } else {
+                    createBannerAd();
+        }
 
 
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(permissionRequestObject!=null){
+            permissionRequestObject.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     private void initlistener() {
@@ -254,62 +309,62 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
 
     }
 
-//    IFLYAdListener mAdListener = new IFLYAdListener(){
-//
-//        /**
-//         * 广告请求成功
-//         */
-//        @Override
-//        public void onAdReceive() {
-//            //展示广告
-////            bannerView.showAd();
-//
-//        }
-//
-//        /**
-//         * 广告请求失败
-//         */
-//        @Override
-//        public void onAdFailed(AdError error) {
-//        }
-//
-//        /**
-//         * 广告被点击
-//         */
-//        @Override
-//        public void onAdClick() {
-//        }
-//
-//        /**
-//         * 广告被关闭
-//         */
-//        @Override
-//        public void onAdClose() {
-//        }
-//
-//        @Override
-//        public void onAdExposure() {
-//            // TODO Auto-generated method stub
-//
-//        }
-//    };
+    IFLYAdListener mAdListener = new IFLYAdListener(){
 
-//    public void createBannerAd() {
-//        //此广告位为Demo专用，广告的展示不产生费用
-//        String adUnitId = "847182F1E4B28774525113F0C57174E7";
-//        //创建旗帜广告，传入广告位ID
-//        bannerView = IFLYBannerAd.createBannerAd(this, adUnitId);
-//        //设置请求的广告尺寸
-//        bannerView.setAdSize(IFLYAdSize.BANNER);
-//        //设置下载广告前，弹窗提示
-//        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
-//
-//        //请求广告，添加监听器
-//        bannerView.loadAd(mAdListener);
-//        //将广告添加到布局
+        /**
+         * 广告请求成功
+         */
+        @Override
+        public void onAdReceive() {
+            //展示广告
+//            bannerView.showAd();
+
+        }
+
+        /**
+         * 广告请求失败
+         */
+        @Override
+        public void onAdFailed(AdError error) {
+        }
+
+        /**
+         * 广告被点击
+         */
+        @Override
+        public void onAdClick() {
+        }
+
+        /**
+         * 广告被关闭
+         */
+        @Override
+        public void onAdClose() {
+        }
+
+        @Override
+        public void onAdExposure() {
+            // TODO Auto-generated method stub
+
+        }
+    };
+
+    public void createBannerAd() {
+        //此广告位为Demo专用，广告的展示不产生费用
+        String adUnitId = "847182F1E4B28774525113F0C57174E7";
+        //创建旗帜广告，传入广告位ID
+        bannerView = IFLYBannerAd.createBannerAd(this, adUnitId);
+        //设置请求的广告尺寸
+        bannerView.setAdSize(IFLYAdSize.BANNER);
+        //设置下载广告前，弹窗提示
+        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
+
+        //请求广告，添加监听器
+        bannerView.loadAd(mAdListener);
+        //将广告添加到布局
 //        layout_ads = (LinearLayout)findViewById(R.id.layout_adview);
-//        layout_ads.removeAllViews();
-//        layout_ads.addView(bannerView);
-//
-//    }
+        layout_ads.removeAllViews();
+        layout_ads.addView(bannerView);
+
+    }
 }

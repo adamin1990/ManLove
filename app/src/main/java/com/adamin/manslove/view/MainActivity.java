@@ -40,12 +40,17 @@ import com.adamin.manslove.utils.LogUtil;
 import com.adamin.manslove.utils.SnackBarUtils;
 import com.adamin.manslove.utils.StatusBarCompact;
 import com.adamin.manslove.view.gank.GankActivity;
+import com.adamin.manslove.view.huasheng.HuashengActivity;
+import com.adamin.manslove.view.jueduilingyu.JueDuiActivity;
+import com.adamin.manslove.view.lexun.LeXunActivity;
 import com.adamin.manslove.view.liebao.LiebaoActivity;
 import com.adamin.manslove.view.main.MainView;
 import com.adamin.manslove.view.meizitu.MeiziTuActivity;
+import com.adamin.manslove.view.tg.TgActivity;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+//import com.umeng.analytics.MobclickAgent;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
@@ -290,6 +295,18 @@ public class MainActivity extends BaseActivity implements MainView, NavigationVi
                 return true;
             case R.id.nav_gank:
                 startActivity(new Intent(MainActivity.this, GankActivity.class));
+                return true;
+            case R.id.nav_huasheng:
+                startActivity(new Intent(MainActivity.this, HuashengActivity.class));
+                return  true;
+            case R.id.nav_juedui:
+                startActivity(new Intent(MainActivity.this, JueDuiActivity.class));
+                return  true;
+            case R.id.nav_lexun:
+                startActivity(new Intent(MainActivity.this, LeXunActivity.class));
+                return  true;
+            case R.id.nav_tiangou:
+                startActivity(new Intent(MainActivity.this, TgActivity.class));
                 return true;
             default:
                 SnackBarUtils.showSnackBar(MainActivity.this, "正在开发(●'◡'●)", SnackBarUtils.INFO);

@@ -10,7 +10,12 @@
     <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> -->
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <application
         android:name=".base.App"
         android:allowBackup="true"
@@ -31,6 +36,21 @@
                 android:name="android.app.default_searchable"
                 android:value=".view.search.SearchActivity" />
         </activity>
+        <!-- <activity -->
+        <!-- android:name=".test.TestActivity" -->
+        <!-- android:screenOrientation="portrait"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+
+
+        <!-- <meta-data -->
+        <!-- android:name="android.app.default_searchable" -->
+        <!-- android:value=".view.search.SearchActivity" /> -->
+        <!-- </activity> -->
 
         <service
             android:name=".service.NetWorkService"
@@ -57,18 +77,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-        <!-- &lt;!&ndash; 讯飞 &ndash;&gt; -->
-        <!-- <service android:name="com.iflytek.voiceads.update.DownloadService" /> -->
+         <!-- 讯飞 -->
+         <service android:name="com.iflytek.voiceads.update.DownloadService" />
 
 
-        <!-- <activity -->
-        <!-- android:name="com.iflytek.voiceads.request.IFLYBrowser" -->
-        <!-- android:screenOrientation="portrait" /> -->
+         <activity
+         android:name="com.iflytek.voiceads.request.IFLYBrowser"
+         android:screenOrientation="portrait" />
 
 
-        <!-- <meta-data -->
-        <!-- android:name="IFLYTEK_APPKEY_AD" -->
-        <!-- android:value="56cffc31" /> -->
+         <meta-data
+         android:name="IFLYTEK_APPKEY_AD"
+         android:value="56cffc31" />
 
 
         <!-- umeng -->
@@ -103,22 +123,51 @@
         <activity
             android:name=".view.liebao.LiebaoActivity"
             android:label="@string/title_activity_liebao"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.liebao.LieBaoAlbumDetailActivity"
             android:label="@string/title_activity_lie_bao_album_detail"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.huasheng.HuashengActivity"
             android:label="@string/title_activity_huasheng"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.gank.GankActivity"
             android:label="@string/title_activity_gank"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.gank.GankDetailActivity"
             android:label="@string/title_activity_gank_detail"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.jueduilingyu.JueDuiActivity"
+            android:label="@string/title_activity_jue_dui"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.jueduilingyu.WebActivity"
+            android:label="@string/title_activity_web"
+            android:theme="@style/AppTheme" />
+        <!-- <activity -->
+        <!-- android:name=".test.TestActivity" -->
+        <!-- android:label="@string/title_activity_test" -->
+        <!-- android:theme="@style/AppTheme"></activity> -->
+        <activity
+            android:name=".view.lexun.LeXunActivity"
+            android:label="@string/title_activity_le_xun"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.tg.TgActivity"
+            android:label="@string/title_activity_tg"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.tg.TgDetailActivity"
+            android:label="@string/title_activity_tg_detail"
             android:theme="@style/AppTheme"></activity>
     </application>
 

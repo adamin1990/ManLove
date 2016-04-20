@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0'>
+    <meta name='apple-mobile-web-app-capable' content='yes'>
+    <meta name='apple-mobile-web-app-status-bar-style' content='black'>
+    <style>
+      *{margin: 0;padding: 0;}.quote{ background: #F9F9F9;background-image:
+      initial;background-position-x: initial;background-position-y: initial;background-size:
+      initial;background-repeat-x: initial;background-repeat-y: initial;background-attachment:
+      initial;background-origin: initial;background-clip: initial;background-color:
+      rgb(249, 249, 249);padding-bottom: 5px;margin: 10px 0;margin-top: 10px;margin-right:
+      0px;margin-bottom: 10px;margin-left: 0px;padding: 10px 10px 10px 35px;padding-top:
+      10px;padding-right: 10px;padding-bottom: 5px;padding-left: 35px;}body{margin:
+      0;padding: 0;}.list{width: 100%;height: auto;}.list ul li{width: 100%;padding:
+      10px 0px;border-bottom: 1px solid #E6E6E6;}.list-top{width: 100%;height:
+      40px;overflow: hidden;margin-bottom: 5px;}.list-top-lf{float: left;width:
+      60%;}.list-top-rg{float: right;text-align: right;width: 38%;margin-right:
+      2%;}.list-top-lf img{width: 40px;height: 40px;float: left;border-radius:
+      40px;margin: 0px 10px;}.list-top-lf h4{font-size: 15px;color: #0e0e0e;line-height:
+      30px;font-weight: normal;overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}.list-top-rg
+      h3{font-size: 15px;text-align: right;color: #0e0e0e;font-weight: normal;}.list-top-rg
+      span{font-size: 12px;text-align: right;color: #666666;}.list-con{width:
+      90%;margin: 0px auto;font-size: 15px;line-height: 18px;color: #333333;}.list-con
+      img{width: auto; max-width:100%;}.list-btm{width: 100%;margin-top: 5px;}.list-btm
+      a{float: right;font-size: 15px;margin-right: 10px; color:#666666; }.container{text-align:center}.container{margin:0
+      10px;position:relative}.container:before,.container:after{content:' ';display:table}.container:after{clear:both}.container:before,.container:after{content:'
+      ';display:table}.container:after{clear:both}.pagin{padding:25px 0;text-align:center;border-bottom:1px
+      solid #dfe3e5;border-top:1px solid #dfe3e5}.pagin .left{position:absolute;left:0;top:5px}.pagin
+      .right{position:absolute;right:0;top:5px}a.btn.btn-sml, .btn.btn-sml {font-size:
+      1.0em;display: inline-block;width: auto;border-width: 1px;padding: .2em
+      .4em;line-height: 20px;}a.btn.btn-gray, .btn.btn-gray {color: #92979a;background-color:
+      #fff;border-color: #c8cbcc;}a.btn,.btn {background-color: #64b4e9;border:
+      1px solid #64b4e9;color: #fff;border-radius: 4px;font-size: 1.0em;padding:
+      .5em 0;text-align: center;font-weight: 400;display: block;width: 100%;-webkit-background-clip:
+      padding-box;-moz-background-clip: padding;background-clip: padding-box;}a
+      {text-decoration: none;color: #229ee3;}a {background-color: transparent;}user
+      agent stylesheeta:-webkit-any-link {color: -webkit-link;text-decoration:
+      underline;cursor: auto;}
+    </style>
+    <title>
+      帖子主页
+    </title>
+  </head>
+  
+  <body style='background:#fff; color:whitesmoke'>
+    <div class='list'>
+      <ul>
+{{floors}}
+	  </ul>
+<div class='pagin'>
+  <div class='container'>
+    <div class='left'>
+      <a data-tj='paginFirst' href='url:firstPage' class='btn btn-gray btn-sml'>
+        首页
+      </a>
+      &nbsp;&nbsp;
+      <a data-tj='paginPrev' href='url:beforePage' class='btn btn-gray btn-sml'>
+        上页
+      </a>
+    </div>
+    <div style='background:#fff; color:#1193f5; font-size:19px;margin-top:5px '>
+      {{pagenow}}
+    </div>
+    \>
+    <div class='right'>
+      <a data-tj='paginNext' href='url:nextPage' class='btn btn-gray btn-sml'>
+        下页
+      </a>
+      &nbsp;&nbsp;
+      <a data-tj='paginLast' href='url:lastPage' class='btn btn-gray btn-sml'>
+        尾页
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+
+</html>

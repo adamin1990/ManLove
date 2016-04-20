@@ -18,4 +18,10 @@
     <string name="title_activity_huasheng">HuashengActivity</string>
     <string name="title_activity_gank">GankActivity</string>
     <string name="title_activity_gank_detail">GankDetailActivity</string>
+    <string name="title_activity_jue_dui">JueDuiActivity</string>
+    <string name="title_activity_web">WebActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_le_xun">LeXunActivity</string>
+    <string name="title_activity_tg">TgActivity</string>
+    <string name="title_activity_tg_detail">TgDetailActivity</string>
 </resources>

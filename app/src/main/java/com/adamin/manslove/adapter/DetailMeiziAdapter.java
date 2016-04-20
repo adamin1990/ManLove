@@ -3,6 +3,7 @@ package com.adamin.manslove.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.adamin.manslove.domain.MeiZiTu;
 import com.adamin.manslove.view.meizitu.MeiZituDetailFragment;
@@ -44,7 +45,7 @@ import com.adamin.manslove.view.meizitu.MeiZituDetailFragment;
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class DetailMeiziAdapter extends FragmentPagerAdapter {
+public class DetailMeiziAdapter extends FragmentStatePagerAdapter {
     private MeiZiTu meiZiTu;
 
     public DetailMeiziAdapter(FragmentManager fm, MeiZiTu meiZiTu) {

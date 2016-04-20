@@ -3,6 +3,7 @@ package com.adamin.manslove.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.adamin.manslove.domain.LieBaoAlbumDetail;
 import com.adamin.manslove.view.liebao.LieBaoDetailFragment;
@@ -46,7 +47,7 @@ import java.util.List;
  * //         WebSite: http://lixiaopeng.top
  * //
  */
-public class LieBaoAlbumDetailAdapter extends FragmentPagerAdapter {
+public class LieBaoAlbumDetailAdapter extends FragmentStatePagerAdapter {
     private List<LieBaoAlbumDetail> lieBaoAlbumDetails;
 
     public LieBaoAlbumDetailAdapter(FragmentManager fm, List<LieBaoAlbumDetail> lieBaoAlbumDetails) {

@@ -22,7 +22,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen30"
+        android:layout_height="@dimen/dimen45"
         android:layout_gravity="bottom"
         android:background="#90000000">
 
