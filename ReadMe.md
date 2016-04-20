@@ -10,6 +10,10 @@ you can download the app from :[http://www.coolapk.com/apk/com.adamin.manslove##
 
 # shortcut #
 
+![](shortcut/one.jpg)
+******
+![](shortcut/two.jpg)
+
 
 
 
