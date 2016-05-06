@@ -134,7 +134,7 @@ public class MainFragment extends Fragment implements MainFragmentView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId()==R.id.about){
-            getActivity().startActivity(new Intent(getActivity(), AboutActivity.class));
+//            getActivity().startActivity(new Intent(getActivity(), AboutActivity.class));
 
         }
         return super.onOptionsItemSelected(item);
@@ -177,7 +177,8 @@ public class MainFragment extends Fragment implements MainFragmentView {
                 intent.putExtra("sh","after");
                 intent.putExtra("justone",homeDatas.get(position).getItemNum()==1?true:false);
                 intent.putExtra("url",homeDatas.get(position).getImage());
-                ActivityCompat.startActivity(getActivity(),intent,activityOptionsCompat.toBundle());
+                getActivity().startActivity(intent);
+//                ActivityCompat.startActivity(getActivity(),intent,activityOptionsCompat.toBundle());
 
             }
         });

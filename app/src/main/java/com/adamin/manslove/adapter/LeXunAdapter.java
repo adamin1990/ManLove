@@ -1,5 +1,6 @@
 package com.adamin.manslove.adapter;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import com.adamin.manslove.R;
 import com.adamin.manslove.domain.lexun.LeXunData;
 import com.adamin.manslove.utils.ColorUtils;
+import com.adamin.manslove.view.lexun.LeXunActivity;
+import com.adamin.manslove.view.lexun.LeXunDetailActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -35,12 +38,20 @@ public class LeXunAdapter extends RecyclerView.Adapter<LeXunAdapter.MyAdapter> {
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter holder, int position) {
+    public void onBindViewHolder(final MyAdapter holder, final int position) {
         Picasso.with(holder.itemView.getContext())
                 .load(leXunDatas.get(position).getPrevpath())
                 .placeholder(new ColorDrawable(ColorUtils.getRandomColor(holder.itemView.getContext())))
                 .into(holder.imageView);
         holder.tvcount.setText(leXunDatas.get(position).getTitle()+"");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(holder.itemView.getContext(), LeXunDetailActivity.class);
+                intent.putExtra("id",leXunDatas.get(position).getUnitid());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
 
     }
 

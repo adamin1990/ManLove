@@ -3,11 +3,12 @@ package com.adamin.manslove.domain.lexun;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by adamlee on 2016/4/2.
  */
-public class LeXunDataDetail {
-
+public class LeXunDataDetail implements Serializable{
 
     @SerializedName("infoid")
     @Expose
@@ -282,5 +283,6 @@ public class LeXunDataDetail {
     public void setTotaldown(Integer totaldown) {
         this.totaldown = totaldown;
     }
+
 
 }

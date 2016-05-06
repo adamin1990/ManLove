@@ -1,5 +1,6 @@
 package com.adamin.manslove.adapter;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.adamin.manslove.R;
+import com.adamin.manslove.base.App;
 import com.adamin.manslove.domain.huasheng.HuaShengData;
 import com.adamin.manslove.utils.ColorUtils;
+import com.adamin.manslove.view.huasheng.HuaShengDetialActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -36,12 +39,22 @@ public class HuaShengMainImgAdapter  extends RecyclerView.Adapter<HuaShengMainIm
     }
 
     @Override
-    public void onBindViewHolder(MyAdapter holder, int position) {
+    public void onBindViewHolder(final MyAdapter holder, final int position) {
         Picasso.with(holder.itemView.getContext())
                 .load(huaShengDatas.get(position).getPostImg())
                 .placeholder(new ColorDrawable(ColorUtils.getRandomColor(holder.itemView.getContext())))
+                .resize(App.WITDH/2,300)
+                .centerCrop()
                 .into(holder.imageView);
         holder.tvcount.setText(huaShengDatas.get(position).getSubject()+"");
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(holder.itemView.getContext(), HuaShengDetialActivity.class);
+                intent.putExtra("aid",huaShengDatas.get(position).getTid());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
 
     }
 

@@ -94,7 +94,8 @@ public class GankActivity extends AppCompatActivity implements GankView {
                 ActivityOptionsCompat activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(GankActivity.this, view, "sharedimage");
                 Intent intent = new Intent(GankActivity.this, GankDetailActivity.class);
                 intent.putExtra("ganmeizi", ganMeiZis.get(position));
-                ActivityCompat.startActivity(GankActivity.this, intent, activityOptionsCompat.toBundle());
+                startActivity(intent);
+//                ActivityCompat.startActivity(GankActivity.this, intent, activityOptionsCompat.toBundle());
             }
         });
 

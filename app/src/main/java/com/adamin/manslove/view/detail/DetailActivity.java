@@ -16,9 +16,13 @@ import android.support.v4.widget.EdgeEffectCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -47,13 +51,21 @@ import com.iflytek.voiceads.AdKeys;
 import com.iflytek.voiceads.IFLYAdListener;
 import com.iflytek.voiceads.IFLYAdSize;
 import com.iflytek.voiceads.IFLYBannerAd;
+import com.iflytek.voiceads.IFLYInterstitialAd;
 import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+import net.youmi.android.banner.AdViewListener;
+import net.youmi.android.spot.SpotDialogListener;
+import net.youmi.android.spot.SpotManager;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import adamin.toolkits.utils.DialogUtil;
 import butterknife.Bind;
@@ -62,6 +74,7 @@ import okhttp3.Call;
 
 public class DetailActivity extends AppCompatActivity implements DetailView,DetailFragment.TapListener{
     private static final int CODE_ADS = 0X5;
+    private static final String TAG = "DetailActivity+++++";
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.appbarlayout)
@@ -88,11 +101,14 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
     private IFLYBannerAd bannerView;
     private PermissionUtil.PermissionRequestObject permissionRequestObject;
 
+    private IFLYInterstitialAd interstitialAd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        //设置全屏
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -148,7 +164,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         } else {
                     createBannerAd();
         }
-
+        setupBannerAd();
+//        setupSpotAd();
 
     }
 
@@ -306,6 +323,12 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
                 .translationY(hide?0:-(appBarLayout.getHeight()+StatusBarCompact.getStatusBarHeight(DetailActivity.this)))
                 .setDuration(300)
                 .start();
+        layout_ads.animate()
+                .translationY(hide?0:layout_ads.getHeight())
+                .setDuration(300)
+                .start();
+
+
 
     }
 
@@ -318,6 +341,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
         public void onAdReceive() {
             //展示广告
 //            bannerView.showAd();
+            //展示广告
+            interstitialAd.showAd();
 
         }
 
@@ -350,21 +375,137 @@ public class DetailActivity extends AppCompatActivity implements DetailView,Deta
     };
 
     public void createBannerAd() {
+//        //此广告位为Demo专用，广告的展示不产生费用
+//        String adUnitId = "847182F1E4B28774525113F0C57174E7";
+//        //创建旗帜广告，传入广告位ID
+//        bannerView = IFLYBannerAd.createBannerAd(this, adUnitId);
+//        //设置请求的广告尺寸
+//        bannerView.setAdSize(IFLYAdSize.BANNER);
+//        //设置下载广告前，弹窗提示
+//        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
+//
+//        //请求广告，添加监听器
+//        bannerView.loadAd(mAdListener);
+//        //将广告添加到布局
+////        layout_ads = (LinearLayout)findViewById(R.id.layout_adview);
+//        layout_ads.removeAllViews();
+//        layout_ads.addView(bannerView);
+
+    }
+
+    /**
+     * 设置广告条广告
+     */
+    private void setupBannerAd() {
+        //		/**
+        //		 * 普通布局
+        //		 */
+        //		//　实例化广告条
+        //		AdView adView = new AdView(mContext, AdSize.FIT_SCREEN);
+        //		LinearLayout bannerLayout = (LinearLayout) findViewById(R.id.ll_banner);
+        //		bannerLayout.addView(adView);
+        /**
+         * 悬浮布局
+         */
+        // 实例化LayoutParams(重要)
+        FrameLayout.LayoutParams layoutParams =
+                new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+        //　设置广告条的悬浮位置，这里示例为右下角
+        layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
+//        layoutParams.topMargin=56;
+        //　实例化广告条
+        AdView adView = new AdView(DetailActivity.this, AdSize.FIT_SCREEN);
+        // 监听广告条接口
+        adView.setAdListener(new AdViewListener() {
+
+            @Override
+            public void onSwitchedAd(AdView adView) {
+                Log.i(TAG, "广告条切换");
+            }
+
+            @Override
+            public void onReceivedAd(AdView adView) {
+                Log.i(TAG, "请求广告条成功");
+            }
+
+            @Override
+            public void onFailedToReceivedAd(AdView adView) {
+                Log.i(TAG, "请求广告条失败");
+            }
+        });
+        // 调用Activity的addContentView函数
+  addContentView(adView, layoutParams);
+    }
+
+    /**
+     * 设置插屏广告
+     */
+    private void setupSpotAd() {
+        // 预加载插屏广告数据
+        SpotManager.getInstance(getApplicationContext()).loadSpotAds();
+        // 设置插屏动画的横竖屏展示方式，如果设置了横屏，则在有广告资源的情况下会是优先使用横屏图
+        SpotManager.getInstance(getApplicationContext())
+                .setSpotOrientation(SpotManager.ORIENTATION_LANDSCAPE);
+        // 插屏动画效果，0:ANIM_NONE为无动画，1:ANIM_SIMPLE为简单动画效果，2:ANIM_ADVANCE为高级动画效果
+        SpotManager.getInstance(getApplicationContext()).setAnimationType(SpotManager.ANIM_ADVANCE);
+        // 展示插屏广告，可以不调用预加载方法独立使用
+        SpotManager.getInstance(getApplicationContext())
+                .showSpotAds(getApplicationContext(), new SpotDialogListener() {
+                    @Override
+                    public void onShowSuccess() {
+                        Log.i(TAG, "插屏展示成功");
+                    }
+
+                    @Override
+                    public void onShowFailed() {
+                        Log.i(TAG, "插屏展示失败");
+//                            finish();
+                    }
+
+                    @Override
+                    public void onSpotClosed() {
+                        Log.i(TAG, "插屏被关闭");
+//                            finish();
+                    }
+
+                    @Override
+                    public void onSpotClick(boolean isWebPath) {
+                        Log.i(TAG, "插屏被点击，isWebPath = " + isWebPath);
+                    }
+
+                });
+    }
+
+
+
+    public void createInterstitialAd() {
         //此广告位为Demo专用，广告的展示不产生费用
-        String adUnitId = "847182F1E4B28774525113F0C57174E7";
-        //创建旗帜广告，传入广告位ID
-        bannerView = IFLYBannerAd.createBannerAd(this, adUnitId);
-        //设置请求的广告尺寸
-        bannerView.setAdSize(IFLYAdSize.BANNER);
+        final String adUnitId = "BB3C36E54DB0A56EC776075B09086613";
+        //创建插屏广告，传入广告位ID
+        interstitialAd = IFLYInterstitialAd.createInterstitialAd(this, adUnitId);
+        //设置广告尺寸
+        interstitialAd.setAdSize(IFLYAdSize.INTERSTITIAL);
         //设置下载广告前，弹窗提示
-        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
+        interstitialAd.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
 
         //请求广告，添加监听器
-        bannerView.loadAd(mAdListener);
-        //将广告添加到布局
-//        layout_ads = (LinearLayout)findViewById(R.id.layout_adview);
-        layout_ads.removeAllViews();
-        layout_ads.addView(bannerView);
+        interstitialAd.loadAd(mAdListener);
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Random random=new Random();
+        int a=random.nextInt(3);
+        if(a==2){
+            createInterstitialAd();
+//            setupSpotAd();
+
+
+        }else {
+            super.onBackPressed();
+
+        }
     }
 }

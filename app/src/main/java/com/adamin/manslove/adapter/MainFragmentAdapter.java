@@ -12,6 +12,7 @@ import com.adamin.manslove.R;
 import com.adamin.manslove.domain.HomeData;
 import com.adamin.manslove.utils.ColorUtils;
 import com.adamin.manslove.utils.Constant;
+import com.adamin.manslove.utils.LogUtil;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -74,6 +75,8 @@ public class MainFragmentAdapter extends RecyclerView.Adapter<MainFragmentAdapte
 
     @Override
     public void onBindViewHolder(final MainFragmentHolder holder, final int position) {
+        LogUtil.error(MainFragmentAdapter.class,Constant.BASEIMGURL
+                +homeDatas.get(position).getImage());
         Picasso.with(holder.itemView.getContext()).load(Constant.BASEIMGURL
         +homeDatas.get(position).getImage()).placeholder(new ColorDrawable(ColorUtils.getRandomColor(holder.itemView.getContext())))
                 .into(holder.imageView);

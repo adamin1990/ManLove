@@ -14,7 +14,8 @@
     <string name="title_activity_meizi_tu">MeiziTuActivity</string>
     <string name="title_activity_liebao">LiebaoActivity</string>
     <string name="title_activity_lie_bao_album_detail">LieBaoAlbumDetailActivity</string>
-    <string name="gongao">  本项目是作者基于第三方api开发的app.\n  项目开发的初衷是学习MVP,没有用作商业性质.\n项目目前已经开源到github上面,仅供参考\n如果您喜欢这个项目\n那么请您在应用市场里提出意见打个满分给点鼓励呗</string>
+    <string name="gongao"> 资源更新中  \n 如有牵涉版权问题 联系qq 190268521. \n
+    若有好的资源站点，欢迎联系qq  190268521.</string>
     <string name="title_activity_huasheng">HuashengActivity</string>
     <string name="title_activity_gank">GankActivity</string>
     <string name="title_activity_gank_detail">GankDetailActivity</string>
@@ -24,4 +25,6 @@
     <string name="title_activity_le_xun">LeXunActivity</string>
     <string name="title_activity_tg">TgActivity</string>
     <string name="title_activity_tg_detail">TgDetailActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_hua_sheng_detial">HuaShengDetialActivity</string>
 </resources>

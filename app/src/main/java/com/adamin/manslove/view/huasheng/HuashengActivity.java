@@ -41,6 +41,7 @@ public class HuashengActivity extends AppCompatActivity {
         adapter=new HuaShengFragmentAdapter(getSupportFragmentManager(),ids,names);
         pagerFixed.setAdapter(adapter);
         tabLayout.setupWithViewPager(pagerFixed);
+        pagerFixed.setOffscreenPageLimit(10);
     }
 
 

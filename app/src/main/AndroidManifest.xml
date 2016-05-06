@@ -9,13 +9,29 @@
     <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
     <!-- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <!-- 配置权限 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- 如果使用积分墙广告,还需要配置下面权限 -->
 
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.GET_TASKS"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!--
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    -->
+
+
+    <!-- 以下为可选权限 -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
     <application
         android:name=".base.App"
         android:allowBackup="true"
@@ -26,11 +42,13 @@
         <activity
             android:name=".view.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
             <meta-data
                 android:name="android.app.default_searchable"
@@ -77,19 +95,16 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
 
-         <!-- 讯飞 -->
-         <service android:name="com.iflytek.voiceads.update.DownloadService" />
+        <!-- 讯飞 -->
+        <service android:name="com.iflytek.voiceads.update.DownloadService" />
 
+        <activity
+            android:name="com.iflytek.voiceads.request.IFLYBrowser"
+            android:screenOrientation="portrait" />
 
-         <activity
-         android:name="com.iflytek.voiceads.request.IFLYBrowser"
-         android:screenOrientation="portrait" />
-
-
-         <meta-data
-         android:name="IFLYTEK_APPKEY_AD"
-         android:value="56cffc31" />
-
+        <meta-data
+            android:name="IFLYTEK_APPKEY_AD"
+            android:value="56cffc31" />
 
         <!-- umeng -->
         <meta-data
@@ -167,7 +182,49 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.tg.TgDetailActivity"
-            android:label="@string/title_activity_tg_detail"
+            android:label=" "
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.main.SplashActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- 优米 -->
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar"></activity>
+
+        <service
+            android:name="net.youmi.android.AdService"
+            android:exported="false"></service>
+
+        <receiver android:name="net.youmi.android.AdReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 有米渠道号(可选配置) 渠道号不能带空格，类型为整数 -->
+        <meta-data
+            android:name="YOUMI_CHANNEL"
+            android:value="0"></meta-data>
+
+        <activity
+            android:name=".view.huasheng.HuaShengDetialActivity"
+            android:label=""
+            android:theme="@style/AppTheme"></activity>
+        <activity
+            android:name=".view.lexun.LeXunDetailActivity"
+            android:label=""
             android:theme="@style/AppTheme"></activity>
     </application>
 

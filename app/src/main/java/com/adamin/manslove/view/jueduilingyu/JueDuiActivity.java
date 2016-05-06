@@ -36,6 +36,7 @@ public class JueDuiActivity extends AppCompatActivity {
         duiFragmentAdapter=new JueDuiFragmentAdapter(getSupportFragmentManager(),names,types);
         pagerFixed.setAdapter(duiFragmentAdapter);
         tabLayout.setupWithViewPager(pagerFixed);
+        pagerFixed.setOffscreenPageLimit(6);
 
     }
 

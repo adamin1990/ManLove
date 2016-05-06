@@ -1,4 +1,4 @@
-package com.adamin.manslove.view.detail;
+package com.adamin.manslove.view.huasheng;
 
 import android.Manifest;
 import android.app.Activity;
@@ -8,11 +8,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -26,17 +23,16 @@ import android.widget.Toast;
 
 import com.adamin.manslove.R;
 import com.adamin.manslove.domain.DetailData;
+import com.adamin.manslove.domain.huasheng.HuaShengImageList;
 import com.adamin.manslove.utils.Constant;
 import com.adamin.manslove.utils.LogUtil;
 import com.adamin.manslove.utils.SnackBarUtils;
 import com.squareup.picasso.Callback;
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
 
 import java.io.File;
-import java.net.URI;
 import java.util.UUID;
 
 import butterknife.Bind;
@@ -47,43 +43,9 @@ import okhttp3.Request;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * //                           o8888888o
- * //                           88" . "88
- * //                           (| -_- |)
- * //                            O\ = /O
- * //                        ____/`---'\____
- * //                      .   ' \\| |// `.
- * //                       / \\||| : |||// \
- * //                     / _||||| -:- |||||- \
- * //                       | | \\\ - /// | |
- * //                     | \_| ''\---/'' | |
- * //                      \ .-\__ `-` ___/-. /
- * //                   ___`. .' /--.--\ `. . __
- * //                ."" '< `.___\_<|>_/___.' >'"".
- * //               | | : `- \`.;`\ _ /`;.`/ - ` : | |
- * //                 \ \ `-. \_ __\ /__ _/ .-` / /
- * //         ======`-.____`-.___\_____/___.-`____.-'======
- * //                            `=---='
- * //
- * //         .............................................
- * //                  佛祖镇楼                  BUG辟易
- * //          佛曰:
- * //                  写字楼里写字间，写字间里程序员；
- * //                  程序人员写程序，又拿程序换酒钱。
- * //                  酒醒只在网上坐，酒醉还来网下眠；
- * //                  酒醉酒醒日复日，网上网下年复年。
- * //                  但愿老死电脑间，不愿鞠躬老板前；
- * //                  奔驰宝马贵者趣，公交自行程序员。
- * //                  别人笑我忒疯癫，我笑自己命太贱；
- * //                  不见满街漂亮妹，哪个归得程序员？
- * //
- * //         Created by LiTao on 2016-02-26-22:42.
- * //         Company: QD24so
- * //         Email: 14846869@qq.com
- * //         WebSite: http://lixiaopeng.top
- * //
+ * Created by adamlee on 2016/5/5.
  */
-public class DetailFragment extends Fragment {
+public class HuaShengDetailFragment extends Fragment {
     private static final int WRITE_EXTERNAL_PERMISSIONS_REQUEST = 0X2;
     private static final int MSGDW = 0X3;
     private static final int MSGSHARE = 0X4;
@@ -92,15 +54,15 @@ public class DetailFragment extends Fragment {
     @Bind(R.id.imageview)
     ImageView imageView;
     PhotoViewAttacher attacher;
-    DetailData detailData;
+    String detailData;
     Picasso picasso;
     TapListener tapListener;
     String url = null;
 
-    public static DetailFragment instance(DetailData detailData) {
-        DetailFragment detailFragment = new DetailFragment();
+    public static HuaShengDetailFragment instance(String detailData) {
+        HuaShengDetailFragment detailFragment = new HuaShengDetailFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("detail", detailData);
+        bundle.putString("detail", detailData);
         detailFragment.setArguments(bundle);
         return detailFragment;
     }
@@ -111,13 +73,14 @@ public class DetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
         ButterKnife.bind(this, view);
         setHasOptionsMenu(true);
-        detailData = (DetailData) getArguments().getSerializable("detail");
-        LogUtil.error(DetailFragment.class, Constant.BASEIMGURL+detailData.getUrl() + "都自己哦");
+        detailData = getArguments().getString("detail");
+        LogUtil.error(HuaShengDetailFragment.class, detailData);
         picasso = new Picasso.Builder(getContext())
                 .build();
-        LogUtil.error(DetailFragment.class,Constant.BASEIMGURL + detailData.getUrl());
+//        LogUtil.error(HuaShengDetailFragment.class,Constant.BASEIMGURL + detailData.getUrl());
         picasso.with(getContext())
-                .load(Constant.BASEIMGURL + detailData.getUrl())
+                .load(detailData)
+                .fit()
                 .into(imageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -144,6 +107,7 @@ public class DetailFragment extends Fragment {
 
         return view;
     }
+
 
     private void checkPermisson() {
         // 1) Use the support library version ContextCompat.checkSelfPermission(...) to avoid
@@ -221,7 +185,7 @@ public class DetailFragment extends Fragment {
 
     private void downloadImg() {
         OkHttpUtils.get()
-                .url(Constant.BASEIMGURL + detailData.getUrl())
+                .url(detailData)
                 .tag(this)
                 .build()
                 .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath() + "/manlove", getRandomFile()) {
@@ -261,7 +225,7 @@ public class DetailFragment extends Fragment {
 
     private String getUri() {
         OkHttpUtils.get()
-                .url(Constant.BASEIMGURL + detailData.getUrl())
+                .url(detailData)
                 .tag(this)
                 .build()
                 .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath() + "/manlove", getRandomFile()) {
@@ -311,11 +275,8 @@ public class DetailFragment extends Fragment {
         return s + ".png";
     }
 
+
     public interface TapListener {
         void tap();
-    }
-
-    public void setTablistener(TapListener listener) {
-        this.tapListener = listener;
     }
 }

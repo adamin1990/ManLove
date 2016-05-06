@@ -13,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.adamin.manslove.R;
 import com.adamin.manslove.adapter.MeiZiTuAdapter;
@@ -26,6 +27,11 @@ import com.adamin.superrecyclerview.animator.adapters.SlideInBottomAnimationAdap
 import com.adamin.superrecyclerview.animator.adapters.SlideInLeftAnimationAdapter;
 import com.adamin.superrecyclerview.superrecycer.OnMoreListener;
 import com.adamin.superrecyclerview.superrecycer.SuperRecyclerView;
+import com.iflytek.voiceads.AdError;
+import com.iflytek.voiceads.AdKeys;
+import com.iflytek.voiceads.IFLYAdListener;
+import com.iflytek.voiceads.IFLYAdSize;
+import com.iflytek.voiceads.IFLYBannerAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +51,8 @@ public class MeiziTuActivity extends BaseActivity implements MeiZiTuView{
     private String sinceid="";
     private List<MeiZiTu> meiZiTus;
     private MeiZiTuAdapter meiZiTuAdapter;
+    private IFLYBannerAd bannerView;
+    LinearLayout layout_ads;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +69,7 @@ public class MeiziTuActivity extends BaseActivity implements MeiZiTuView{
                 meiziTuPresenter.fechData(sinceid,this);
             }
         });
+        createBannerAd();
     }
 
     private void init() {
@@ -146,4 +155,66 @@ public class MeiziTuActivity extends BaseActivity implements MeiZiTuView{
         meiziTuPresenter.cancelFetch(this);
         super.onDestroy();
     }
+
+    public void createBannerAd() {
+        //此广告位为Demo专用，广告的展示不产生费用
+        String adUnitId = "847182F1E4B28774525113F0C57174E7";
+        //创建旗帜广告，传入广告位ID
+        bannerView = IFLYBannerAd.createBannerAd(this, adUnitId);
+        //设置请求的广告尺寸
+        bannerView.setAdSize(IFLYAdSize.BANNER);
+        //设置下载广告前，弹窗提示
+        bannerView.setParameter(AdKeys.DOWNLOAD_ALERT, "true");
+
+        //请求广告，添加监听器
+        bannerView.loadAd(mAdListener);
+        //将广告添加到布局
+        layout_ads = (LinearLayout)findViewById(R.id.layout_adview);
+        layout_ads.removeAllViews();
+        layout_ads.addView(bannerView);
+
+    }
+
+
+    IFLYAdListener mAdListener = new IFLYAdListener(){
+
+        /**
+         * 广告请求成功
+         */
+        @Override
+        public void onAdReceive() {
+            //展示广告
+            bannerView.showAd();
+            //展示广告
+//            interstitialAd.showAd();
+
+        }
+
+        /**
+         * 广告请求失败
+         */
+        @Override
+        public void onAdFailed(AdError error) {
+        }
+
+        /**
+         * 广告被点击
+         */
+        @Override
+        public void onAdClick() {
+        }
+
+        /**
+         * 广告被关闭
+         */
+        @Override
+        public void onAdClose() {
+        }
+
+        @Override
+        public void onAdExposure() {
+            // TODO Auto-generated method stub
+
+        }
+    };
 }

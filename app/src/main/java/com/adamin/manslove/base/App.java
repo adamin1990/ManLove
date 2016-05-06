@@ -52,11 +52,13 @@ public class App extends Application {
     static  {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
     }
+    public static int WITDH;
 
     @Override
     public void onCreate() {
         super.onCreate();
         OkHttpUtils.getInstance().setConnectTimeout(20, TimeUnit.SECONDS);
         utilsSharedPreferences=new UtilsSharedPreferences(getApplicationContext(),"manslove");
+        WITDH=getResources().getDisplayMetrics().widthPixels;
     }
 }
